@@ -4,7 +4,7 @@ Descripción proximamente....
 
 ## Github Page
 
- <a href="https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas">Link del proyecto</a>
+ <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Link del proyecto</a>
 
 ## Herramientas utilizadas
 
