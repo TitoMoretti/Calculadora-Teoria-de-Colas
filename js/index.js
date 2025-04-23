@@ -23,6 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Redirigir a la página de MM1 al hacer clic en el modelo
     modelMM1.addEventListener('click', () => {
-        window.location.href = 'models/MM1.html';
+        window.location.href = 'MM1.html';
     });
 });
