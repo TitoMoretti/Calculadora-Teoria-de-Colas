@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoría de Colas</title>
+    <link rel="icon" href="images/head-icon.png" type="image/png">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/models.css">
+    <link rel="stylesheet" href="styles/normalize.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-left">
+                    <button class="menu-button">☰</button>
+                    <a href="/index.html" class="nav-title">Teoría de Colas</a>
+                    <div class="nav-links">
+                        <a href="MM1.html">M/M/1</a>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <p class="author-text">Modelización Numérica</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Modelo M/M/1</h2>
+                <p class="description-theory">
+                    El modelo M/M/1 es un tipo de sistema de colas que se caracteriza por tener arribos y servicios aleatorios (de tipo Markoviano) y un único servidor. En este modelo:
+                    <br>
+                    • Los clientes llegan siguiendo una distribución Poisson con una tasa promedio de arribos λ (clientes por segundo).
+                    <br>
+                    • El tiempo de servicio sigue una distribución exponencial con una tasa promedio μ (clientes atendidos por segundo).
+                    <br>
+                    • Hay una sola cola y un solo servidor que atiende de a un cliente a la vez.
+                    <br>
+                    • Se supone que las llegadas y los servicios son procesos independientes. Independientemente de la llegada de los clientes, el servidor trabaja a su velocidad.
+                </p>
+            </div>
+            <div class="img-container">
+                <img src="/images/mm1Image1.png" alt="mm1Image1" class="info-image">
+            </div>
+        </div>
+        <div class="calculator-container">
+            <div class="calculator">
+                <div class="form-container">
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="arriboId">
+                                Introduzca una tasa de arribo (λ):
+                            </label>
+                            <input type="text" id="arriboId" class="input-field">
+                            <p class="error-message" id="error-arriboId"></p>
+                        </div>
+                        <div class="input-container">
+                            <label class="input-label" for="servicioId">
+                                Introduzca una tasa de servicio (μ):
+                            </label>
+                            <input type="text" id="servicioId" class="input-field">
+                            <p class="error-message" id="error-servicioId"></p>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="poblacionId">
+                                Introduzca una población (N):
+                            </label>
+                            <input type="text" id="poblacionId" class="input-field">
+                            <p class="error-message" id="error-poblacionId"></p>
+                        </div>
+                        <div class="input-container">
+                            <label class="input-label" for="tiempoId">
+                                Introduzca un tiempo en segundos (t):
+                            </label>
+                            <input type="text" id="tiempoId" class="input-field">
+                            <p class="error-message" id="error-tiempoId"></p>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="submit-button" id="submitId">Calcular</button>
+                    </div>
+                </div>
+
+                <div id="results" class="results-container" style="display: none;">
+                    <h3>Resultados del Modelo M/M/1</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <h4>Intensidad de tráfico (ρ):</h4>
+                            <p id="result-rho"></p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Probabilidad de 0 clientes en el sistema (P0):</h4>
+                            <p id="result-p0"></p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Número medio de clientes en la cola (Lq):</h4>
+                            <p id="result-lq"></p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Número medio de clientes en el sistema (L):</h4>
+                            <p id="result-l"></p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Tiempo medio de espera en la cola (Wq):</h4>
+                            <p id="result-wq"></p>
+                        </div>
+                        <div class="result-item">
+                            <h4>Tiempo medio en el sistema (W):</h4>
+                            <p id="result-w"></p>
+                        </div>
+                    </div>
+                    <div class="probability-section">
+                        <h4>Probabilidad de <span id="result-n"></span> clientes en el sistema:</h4>
+                        <p id="result-pn"></p>
+                    </div>
+                    <div class="formula-section">
+                        <h4>Fórmulas utilizadas:</h4>
+                        <ul>
+                            <li>ρ = λ/μ</li>
+                            <li>P₀ = 1 - ρ</li>
+                            <li>Lq = ρ²/(1-ρ)</li>
+                            <li>L = ρ/(1-ρ)</li>
+                            <li>Wq = Lq/λ</li>
+                            <li>W = L/λ</li>
+                            <li>Pₙ = P₀ × ρⁿ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Accesos Rápidos</h3>
+                    <ul>
+                        <li><a href="/index.html">Inicio</a></li>
+                        <li><a href="/models/MM1.html">M/M/1</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Link del proyecto</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ernesto J. Moretti. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/index.js"></script>
+    <script src="/js/MM1.js"></script>
+</body>
+</html>
