@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
         arribo: document.getElementById('arriboId'),
         servicio: document.getElementById('servicioId'),
         poblacion: document.getElementById('poblacionId'),
-        tiempo: document.getElementById('tiempoId')
     };
     var submitButton = document.getElementById('submitId');
     var resultsContainer = document.getElementById('results');
