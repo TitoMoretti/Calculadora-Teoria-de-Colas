@@ -46,6 +46,38 @@
                 <img src="images/mm1Image1.png" alt="mm1Image1" class="info-image">
             </div>
         </div>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Fórmulas</h2>
+                <div class="formula-section">
+                    <ul>
+                        <li>ρ = λ/μ</li>
+                        <li>P₀ = 1 - ρ</li>
+                        <li>Lq = λ²/(μ × (μ-λ))</li>
+                        <li>Wq = λ/(μ × (μ-λ))</li>
+                        <li>Ls = λ/(μ-λ)</li>
+                        <li>Ws = 1/(μ-λ)</li>
+                        <li>Pₙ = P₀ × ρⁿ</li>
+                    </ul>
+                    <br>
+                    <p class="description-theory">Donde:
+                        <br>
+                        • ρ es la intensidad de tráfico (utilización del sistema).
+                        <br>
+                        • P₀ es la probabilidad de que no haya clientes en el sistema.
+                        <br>
+                        • Lq es el número promedio de clientes en la cola
+                        <br>
+                        • Wq es el tiempo promedio de espera en la cola.
+                        <br>
+                        • Ls es el número promedio de clientes en el sistema.
+                        <br>
+                        • Ws es el tiempo promedio en el sistema.
+                        <br>
+                        • Pₙ es la probabilidad de que haya n clientes en el sistema.
+                </div>
+            </div>
+        </div>
         <div class="calculator-container">
             <div class="calculator">
                 <div class="form-container">
@@ -78,50 +110,37 @@
                         <button class="submit-button" id="submitId">Calcular</button>
                     </div>
                 </div>
-
                 <div id="results" class="results-container" style="display: none;">
-                    <h3>Resultados del Modelo M/M/1</h3>
+                    <h3>Resultados</h3>
                     <div class="results-grid">
                         <div class="result-item">
                             <h4>Intensidad de tráfico (ρ):</h4>
                             <p id="result-rho"></p>
                         </div>
                         <div class="result-item">
-                            <h4>Probabilidad de 0 clientes en el sistema (P0):</h4>
+                            <h4>Probabilidad de 0 clientes en el sistema (P₀):</h4>
                             <p id="result-p0"></p>
                         </div>
                         <div class="result-item">
-                            <h4>Número medio de clientes en la cola (Lq):</h4>
+                            <h4>Número promedio de clientes en la cola (Lq):</h4>
                             <p id="result-lq"></p>
                         </div>
                         <div class="result-item">
-                            <h4>Número medio de clientes en el sistema (L):</h4>
+                            <h4>Número promedio de clientes en el sistema (Ls):</h4>
                             <p id="result-l"></p>
                         </div>
                         <div class="result-item">
-                            <h4>Tiempo medio de espera en la cola (Wq):</h4>
+                            <h4>Tiempo promedio de espera en la cola (Wq):</h4>
                             <p id="result-wq"></p>
                         </div>
                         <div class="result-item">
-                            <h4>Tiempo medio en el sistema (W):</h4>
+                            <h4>Tiempo promedio en el sistema (Ws):</h4>
                             <p id="result-w"></p>
                         </div>
                     </div>
                     <div class="probability-section">
                         <h4>Probabilidad de <span id="result-n"></span> clientes en el sistema:</h4>
                         <p id="result-pn"></p>
-                    </div>
-                    <div class="formula-section">
-                        <h4>Fórmulas utilizadas:</h4>
-                        <ul>
-                            <li>ρ = λ/μ</li>
-                            <li>P₀ = 1 - ρ</li>
-                            <li>Lq = ρ²/(1-ρ)</li>
-                            <li>L = ρ/(1-ρ)</li>
-                            <li>Wq = Lq/λ</li>
-                            <li>W = L/λ</li>
-                            <li>Pₙ = P₀ × ρⁿ</li>
-                        </ul>
                     </div>
                 </div>
             </div>

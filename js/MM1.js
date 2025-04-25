@@ -55,18 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Cálculos de MM1
     function calculateMM1(λ, μ, N) {
-        //Intensidad de tráfico
+        //Utilización del sistema
         var rho = λ / μ;
         //Probabilidad de que no haya clientes en el sistema
         var p0 = 1 - rho;
         //Número promedio de clientes en la cola
-        var lq = (rho * rho) / (1 - rho);
+        var lq = (λ * λ) / (μ * (μ - λ));
         //Número promedio de clientes en el sistema
-        var l = rho / (1 - rho);
+        var l = λ / (μ - λ);
         //Tiempo promedio de espera en la cola
-        var wq = lq / λ;
+        var wq = λ / (μ * (μ - λ));
         //Tiempo promedio en el sistema
-        var w = l / λ;
+        var w = l / (μ - λ);
         //Probabilidad de que haya N clientes en el sistema
         var pn = p0 * Math.pow(rho, N);
         return { rho, p0, lq, l, wq, w, pn };
@@ -89,13 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayResults(results, N) {
         clearResults();
         document.getElementById('result-rho').textContent = results.rho.toFixed(4);
-        document.getElementById('result-p0').textContent = results.p0.toFixed(4);
+        document.getElementById('result-p0').textContent = results.p0.toFixed(4) + ' = ' + results.p0.toFixed(4) * 100 + '%';
         document.getElementById('result-lq').textContent = results.lq.toFixed(4);
         document.getElementById('result-l').textContent = results.l.toFixed(4);
         document.getElementById('result-wq').textContent = results.wq.toFixed(4);
         document.getElementById('result-w').textContent = results.w.toFixed(4);
         document.getElementById('result-n').textContent = N;
-        document.getElementById('result-pn').textContent = results.pn.toFixed(4);
+        document.getElementById('result-pn').textContent = results.pn.toFixed(4) + ' = ' + results.pn.toFixed(4) * 100 + '%';
         resultsContainer.style.display = 'block';
     }
 
