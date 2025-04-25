@@ -7,6 +7,30 @@
     margin-top: 1rem;
 }
 
+.formula-section {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.formula-section ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.formula-section li {
+    background-color: #f0f0f0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
 /*Calculatora*/
 .calculator-container {
     margin-bottom: 2rem;
@@ -183,36 +207,6 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--primary-color);
-}
-
-.formula-section {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.formula-section h4 {
-    color: #333;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-.formula-section ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.formula-section li {
-    background-color: #f0f0f0;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    font-family: monospace;
-    font-size: 0.9rem;
 }
 
 /*Responsive*/
