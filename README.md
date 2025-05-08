@@ -16,6 +16,8 @@ Esta aplicación web es una calculadora especializada en el análisis de sistema
 - JavaScript (Vanilla)
 - Diseño responsivo
 - Animaciones y transiciones suaves
+=======
+ <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Link del proyecto</a>
 
 ## Próximas Características
 - Implementación de más modelos de colas (M/M/2, M/G/1, etc.)
