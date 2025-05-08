@@ -10,15 +10,8 @@ Esta aplicación web es una calculadora especializada en el análisis de sistema
 - Diseño responsivo que se adapta a diferentes dispositivos
 - Resultados detallados y precisos
 
-## Tecnologías Utilizadas
-- HTML5
-- CSS3 (con variables CSS para temas)
-- JavaScript (Vanilla)
-- Diseño responsivo
-- Animaciones y transiciones suaves
-
-## Link del Proyecto
- <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Link</a>
+## Link de la Calculadora
+ <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Haga click aquí.</a>
 
 ## Próximas Características
 - Implementación de más modelos de colas (M/M/2, M/G/1, etc.)
