@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var menuButton = document.querySelector('.menu-button');
     var navLinks = document.querySelector('.nav-links');
     var modelMM1 = document.getElementsByClassName('model-MM1') [0];
-
+    var modelMM1N = document.getElementsByClassName('model-MM1N') [0];
+    
     menuButton.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
@@ -24,5 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //Redirigir a la página de MM1 al hacer clic en el modelo
     modelMM1.addEventListener('click', () => {
         window.location.href = 'MM1.html';
+    });
+
+    //Redirigir a la página de MM1N al hacer clic en el modelo
+    modelMM1N.addEventListener('click', () => {
+        window.location.href = 'MM1N.html';
     });
 });

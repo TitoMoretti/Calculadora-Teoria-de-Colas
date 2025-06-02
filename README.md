@@ -1,14 +1,11 @@
 # Calculadora de Teoría de Colas
 
 ## Descripción
-Esta aplicación web es una calculadora especializada en el análisis de sistemas de colas, actualmente enfocada en el modelo M/M/1. Permite a los usuarios calcular diversos parámetros importantes como tiempos de espera, probabilidades y medidas de rendimiento del sistema.
+Esta aplicación web es una calculadora especializada en el análisis de sistemas de colas. Permite a los usuarios calcular diversos parámetros importantes como tiempos de espera, probabilidades y medidas de rendimiento del sistema.
 
-## Características Actuales
-- Cálculos completos para el modelo M/M/1
-- Interfaz intuitiva y fácil de usar
-- Modo oscuro/claro para mejor experiencia visual
-- Diseño responsivo que se adapta a diferentes dispositivos
-- Resultados detallados y precisos
+## Modelos
+- M/M/1
+- M/M/1/N
 
 ## Link de la Calculadora
  <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Haga click aquí.</a>
@@ -34,7 +31,7 @@ git clone https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas.git
 3. ¡Listo! Ya puedes comenzar a realizar cálculos
 
 ## Contribuciones
-Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+Si desea contribuir, por favor abra un issue primero para discutir los cambios que te gustaría hacer.
 
 ## Contacto
 Para cualquier consulta o sugerencia, por favor contacta a través de GitHub.

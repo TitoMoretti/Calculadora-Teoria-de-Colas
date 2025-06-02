@@ -41,8 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Validar entradas
     function validateInput(value, inputId) {
-        if (!value.trim()) {
-            return showError(inputId, 'Este campo es requerido');
+        if (inputId === 'poblacionId') {
+            //Permitir que N sea vacío
+            if (!value.trim()) {
+                clearError(inputId);
+                return true;
+            }
+        } else {
+            if (!value.trim()) {
+                return showError(inputId, 'Este campo es requerido');
+            }
         }
         //Sanitizar entrada
         const sanitizedValue = sanitizeInput(value);
@@ -50,13 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(inputId).value = sanitizedValue;
         }
         const numValue = parseFloat(sanitizedValue);
-        if (isNaN(numValue)) {
-            return showError(inputId, 'Debe ser un número válido');
+        if (inputId !== 'poblacionId') {
+            if (isNaN(numValue)) {
+                return showError(inputId, 'Debe ser un número válido');
+            }
+            if (numValue <= 0) {
+                return showError(inputId, 'Debe ser mayor que cero');
+            }
+        } else {
+            //Para N, permitir un número válido >= 0
+            if (value.trim() && (isNaN(numValue) || numValue < 0)) {
+                return showError(inputId, 'Debe ser un número válido mayor o igual a cero');
+            }
         }
-        if (numValue <= 0) {
-            return showError(inputId, 'Debe ser mayor que cero');
-        }
-        // Validate decimal places
+        //Validar decimales
         if (sanitizedValue.split('.')[1]?.length > 4) {
             return showError(inputId, 'Máximo 4 decimales permitidos');
         }
@@ -99,7 +114,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const w = l / (μ - λ);
             //Probabilidad de N clientes en el sistema
             const pn = p0 * Math.pow(rho, N);
-            return { rho, p0, lq, l, wq, w, pn };
+            // Probabilidad de al menos N clientes en el sistema: sum_{n=N}^{∞} Pn
+            let sumAtMostNMinus1 = 0;
+            for (let n = 0; n < N; n++) {
+                sumAtMostNMinus1 += p0 * Math.pow(rho, n);
+            }
+            const pAtLeastN = 1 - sumAtMostNMinus1;
+            // Probabilidad de como máximo N clientes en el sistema: sum_{n=0}^{N} Pn
+            let sumAtMostN = 0;
+            for (let n = 0; n <= N; n++) {
+                sumAtMostN += p0 * Math.pow(rho, n);
+            }
+            const pAtMostN = sumAtMostN;
+
+            return { rho, p0, lq, l, wq, w, pn, pAtLeastN, pAtMostN };
         } catch (error) {
             throw new Error(`Error en el cálculo: ${error.message}`);
         }
@@ -109,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearResults() {
         const resultElements = [
             'result-rho', 'result-p0', 'result-lq', 'result-l',
-            'result-wq', 'result-w', 'result-n', 'result-pn'
+            'result-wq', 'result-w', 'result-n', 'result-pn',
+            'result-pn-at-least', 'result-pn-at-most'
         ];
 
         resultElements.forEach(id => {
@@ -139,9 +168,48 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('result-l').textContent = formatNumber(results.l);
             document.getElementById('result-wq').textContent = formatNumber(results.wq);
             document.getElementById('result-w').textContent = formatNumber(results.w);
-            document.getElementById('result-n').textContent = N;
-            document.getElementById('result-pn').textContent = 
-                `${formatNumber(results.pn)} = ${(results.pn * 100).toFixed(2)}%`;
+
+            // Mostrar probabilidades relacionadas con N solo si N está definido
+            if (N !== undefined && N !== null && N !== '' && !isNaN(N)) {
+                document.getElementById('result-n').textContent = N;
+                // Actualizar encabezados para mostrar N
+                document.querySelectorAll('h4').forEach(h4 => {
+                    if (h4.textContent.includes('al menos')) {
+                        h4.innerHTML = `Probabilidad de que haya en el sistema <b>al menos</b> <span id='result-n'>${N}</span> clientes:`;
+                    }
+                    if (h4.textContent.includes('como máximo')) {
+                        h4.innerHTML = `Probabilidad de que haya en el sistema <b>como máximo</b> <span id='result-n'>${N}</span> clientes:`;
+                    }
+                });
+                document.getElementById('result-pn').textContent = 
+                    `${formatNumber(results.pn)} = ${(results.pn * 100).toFixed(2)}%`;
+                // Calcular los primeros tres valores de la sumatoria
+                const pn0 = results.p0 * Math.pow(results.rho, N);
+                const pn1 = results.p0 * Math.pow(results.rho, Number(N) + 1);
+                const pn2 = results.p0 * Math.pow(results.rho, Number(N) + 2);
+                // Mostrar la ecuación de la sumatoria para al menos N clientes con los valores numéricos
+                document.getElementById('result-pn-at-least').innerHTML =
+                    `$$P(\\geq ${N}) = P_{${N}} + P_{${Number(N)+1}} + P_{${Number(N)+2}} + \\ldots = ${pn0.toFixed(4)} + ${pn1.toFixed(4)} + ${pn2.toFixed(4)} + \\ldots$$`;
+                document.getElementById('result-pn-at-most').textContent = 
+                    `${formatNumber(results.pAtMostN)} = ${(results.pAtMostN * 100).toFixed(2)}%`;
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            } else {
+                // Si N no está definido, limpiar los campos relacionados
+                document.getElementById('result-n').textContent = '';
+                document.querySelectorAll('h4').forEach(h4 => {
+                    if (h4.textContent.includes('al menos')) {
+                        h4.innerHTML = `Probabilidad de que haya en el sistema <b>al menos</b> <span id='result-n'></span> clientes:`;
+                    }
+                    if (h4.textContent.includes('como máximo')) {
+                        h4.innerHTML = `Probabilidad de que haya en el sistema <b>como máximo</b> <span id='result-n'></span> clientes:`;
+                    }
+                });
+                document.getElementById('result-pn').textContent = '';
+                document.getElementById('result-pn-at-least').textContent = '';
+                document.getElementById('result-pn-at-most').textContent = '';
+            }
 
             elements.resultsContainer.style.display = 'block';
         } catch (error) {
@@ -166,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearResults();
             
             //Validar todas las entradas
-            const isValid = Object.entries(elements.inputs).every(([_, input]) => 
+            const isValid = Object.entries(elements.inputs).every(([key, input]) => 
                 validateInput(input.value, input.id)
             );
 
@@ -178,7 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 //Obtener los valores de las entradas
                 const λ = parseFloat(elements.inputs.arribo.value);
                 const μ = parseFloat(elements.inputs.servicio.value);
-                const N = parseFloat(elements.inputs.poblacion.value);
+                const N_raw = elements.inputs.poblacion.value;
+                const N = N_raw.trim() === '' ? undefined : parseFloat(N_raw);
 
                 //Calcular los resultados
                 const results = calculateMM1(λ, μ, N);
