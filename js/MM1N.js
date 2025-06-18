@@ -76,26 +76,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calculateMM1N(λ, μ, N, n) {
+        //Utilización del sistema
         const rho = λ / μ;
         let P0, PB, tau, lambdaE, Ls, LQ, Ws, WQ, pn;
         if (rho === 1) {
+            //Probabilidad del sistema vacío
             P0 = 1 / (N + 1);
+            //Probabilidad de bloqueo
             PB = 1 / (N + 1);
+            //Número promedio de clientes en el sistema
             Ls = N / 2;
+            //Número promedio de clientes en la cola
             LQ = (N * (N - 1)) / (2 * (N + 1));
         } else {
+            //Probabilidad del sistema vacío
             P0 = (1 - rho) / (1 - Math.pow(rho, N + 1));
+            //Probabilidad de bloqueo
             PB = Math.pow(rho, N) * (1 - rho) / (1 - Math.pow(rho, N + 1));
+            //Número promedio de clientes en el sistema
             Ls = (rho / (1 - rho)) - ((N + 1) * Math.pow(rho, N + 1)) / (1 - Math.pow(rho, N + 1));
+            //Número promedio de clientes en la cola
             LQ = Ls - (1 - Math.pow(rho, N)) * rho / (1 - Math.pow(rho, N + 1));
         }
+        //Tasa de rechazos
         tau = λ * PB;
+        //Tasa de llegada efectiva
         lambdaE = λ * (1 - PB);
+        //Tiempo promedio en el sistema
         Ws = Ls / lambdaE;
+        //Tiempo promedio en la cola
         WQ = LQ / lambdaE;
+        //Probabilidad de N clientes en el sistema
         pn = Math.pow(rho, n) * (1 - rho) / (1 - Math.pow(rho, N + 1));
+        //Utilización efectiva del sistema
         const rhoE = lambdaE / μ;
+        //Número promedio de clientes en cola para un sistema ocupado
         const lb = LQ / (1 - P0);
+        //Tiempo promedio de clientes en cola para un sistema ocupado
         const wb = WQ / (1 - P0);
         return { rho, P0, PB, tau, lambdaE, Ls, LQ, Ws, WQ, pn, rhoE, lb, wb };
     }
@@ -148,7 +165,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     elements.submitButton.addEventListener('click', async () => {
         try {
+            //Limpiar resultados anteriores
             clearResults();
+
+            //Validación
             const Nval = parseInt(elements.inputs.poblacion.value);
             const isValid = Object.entries(elements.inputs).every(([key, input]) => 
                 validateInput(input.value, input.id, Nval)
@@ -163,7 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nInput === '') {
                     nInput = undefined;
                 }
+                //Número de clientes en el sistema
                 let n = nInput !== undefined ? parseInt(nInput) : undefined;
+                //Se realizan los cálculos
                 const results = calculateMM1N(λ, μ, N, n || 0);
                 displayResults(results, n, nInput);
             }
