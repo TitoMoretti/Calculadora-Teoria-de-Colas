@@ -6,6 +6,7 @@ Esta aplicación web es una calculadora especializada en el análisis de sistema
 ## Modelos
 - M/M/1
 - M/M/1/N
+- M/M/2
 
 ## Link de la Calculadora
  <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Haga click aquí.</a>

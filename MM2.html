@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoría de Colas: M/M/2</title>
+    <link rel="icon" href="./images/head-icon.png" type="image/png">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/models.css">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-left">
+                    <button class="menu-button">☰</button>
+                    <a href="./index.html" class="nav-title">Teoría de Colas</a>
+                    <div class="nav-links">
+                        <a href="./MM1.html">M/M/1</a>
+                        <a href="./MM1N.html">M/M/1/N</a>
+                        <a href="./MM2.html">M/M/2</a>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <p class="author-text">Modelización Numérica</p>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Modelo M/M/2</h2>
+                <p class="description-theory">
+                    El modelo M/M/2 es un tipo de sistema de colas que se caracteriza por tener arribos y servicios aleatorios (de tipo Markoviano) y DOS servidores. En este modelo:</p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Los clientes llegan siguiendo una distribución Poisson con una tasa promedio de arribos λ (clientes por segundo).</li>
+                    <li>El tiempo de servicio sigue una distribución exponencial con una tasa promedio μ (clientes atendidos por segundo). Pero aquí la tasa se calcula haciendo la sumatoria de las tasas de servicios obtenidas con cada servidor</li>
+                    <li>Hay una sola cola y dos servidores que atienden de a un cliente a la vez.</li>
+                    <li>Las salidas son independientes de las entradas. Independientemente de la llegada de los clientes, el servidor trabaja a su velocidad</li>
+                </ul>
+                <br>
+                <div class="formula-section">
+                    <ul>
+                        <li>\[ \mu_s = \mu_1 + \mu_2 \] </li>
+                        <li>\[ \rho = \frac{\lambda}{\mu_s} = \frac{\lambda}{\mu_1 + \mu_2} \] </li>
+                        <li>\[ L_s = \frac{\rho}{1-\rho} \]</li>
+                        <li>\[ L_q = \frac{\rho^2}{1-\rho} \] </li>
+                        <li>\[ w_s = \frac{L_s}{\lambda} \]</li>
+                        <li>\[ w_q = \frac{L_q}{\lambda} \] </li>
+                        <li>\[ P_0 = 1 - \rho \]</li>
+                        <li>\[ P_n = (1-\rho)\rho^n \] </li>
+                    </ul>
+                    <br>
+                    <p class="description-theory">Donde:
+                        <br>
+                        • \(\mu_s\) es la tasa de servicio total del sistema
+                        <br>
+                        • \(\mu_1, \mu_2\) son las tasas de servicio de cada servidor
+                        <br>
+                        • \(\lambda\) es la tasa de llegada de clientes
+                        <br>
+                        • \(\rho\) es la utilización del sistema
+                        <br>
+                        • \(L_s\) es la longitud promedio del sistema
+                        <br>
+                        • \(L_q\) es la longitud promedio de la cola
+                        <br>
+                        • \(w_s\) es el tiempo promedio en el sistema
+                        <br>
+                        • \(w_q\) es el tiempo promedio de espera en la cola
+                        <br>
+                        • \(P_0\) es la probabilidad de sistema vacío
+                        <br>
+                        • \(P_n\) es la probabilidad de tener n clientes en el sistema
+                    </p>
+                </div>
+                <br>
+                <p class="description-theory">
+                    Pero, desde aquí hay que saber que existen 2 tipos de sistemas M/M/2: Sistemas con Servidores a la Misma Velocidad; Sistemas con Servidores a Diferentes Velocidades.</p>
+            </div>
+            <div class="img-container">
+                <img width="500px" src="./images/mm2Image1.png" alt="mm2Image1" class="info-image">
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Sistemas M/M/2 con Servidores a la Misma Velocidad</h2>
+                <p class="description-theory">
+                    En este modelo M/M/2, los servidores no se diferencian en torno a su velocidad. Por lo tanto, sus tasas de servicio serán iguales. En este modelo la tasa de servicio total será el doble de la tasa de servicio de cada servidor.</p>
+                <div class="formula-section">
+                    <ul>
+                        <li>\[ \mu = \mu_1 = \mu_2 \]</li>
+                        <li>\[ \mu_s = 2 \cdot \mu \]</li>
+                        <li>\[ \rho = \frac{\lambda}{2 \cdot \mu} \]</li>
+                    </ul>
+                    <br>
+                    <p class="description-theory">Donde:
+                        <br>
+                        • \(\mu\) es la tasa de servicio de cada servidor individual
+                        <br>
+                        • \(\mu_s\) es la tasa de servicio total del sistema
+                        <br>
+                        • \(\lambda\) es la tasa de llegada de clientes
+                        <br>
+                        • \(\rho\) es la utilización del sistema
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Sistemas M/M/2 con Servidores a Diferentes Velocidades</h2>
+                <p class="description-theory">
+                    En este modelo M/M/2, las tasas de servicio provenientes de cada servidor NO son iguales,
+                    por lo tanto, tendremos que realizar las ecuaciones generales de M/M/2. Pero en ocasiones, y volviendo al tema de los sistemas M/M/1, uno de estos puede resultar insuficiente y provocar el crecimiento de las colas hacia el congestionamiento. Para diagnosticar si esto es circunstancial o permanente (donde la tasa de arribos aumenta "para siempre), se puede observar el sistema durante un periodo (por ejemplo, un mes) y aplicar el Teorema de Little para calcular N.</p>
+                <div class="formula-section">
+                    <ul>
+                        <li>\[ N = \lambda \cdot W \]</li>
+                    </ul>
+                    <br>
+                    <p class="description-theory">El número medio de clientes es directamente proporcional al tiempo medio de permanencia de los clientes en el sistema (W) siendo el factor de proporcionalidad la tasa de arribos.</p>
+                </div>
+                <br>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Si \( N < \frac{\lambda}{\mu_1 - \lambda} \), entonces el sistema está adecuado y no se modifica.</li>
+                    <li>Si \( N > \frac{\lambda}{\mu_1 - \lambda} \), entonces hay que aumentar la tasa de servicio.</li>
+                    <li>Si \( N = \frac{\lambda}{\mu_1 - \lambda} \), entonces el sistema está justo; puede convenir aumentar la tasa de servicio debido a que la tasa de arribo está aumentando.</li>
+                </ul>
+                <br>
+                <p class="description-theory">Ante esto, se pueden aplicar 3 soluciones diferentes para el congestionamiento y arreglar un sistema insuficiente:</p>
+                <ul style="margin-left: 1.5rem;">
+                    1.	Cambiar el servidor por uno más rápido (Siempre funciona y mejora el rendimiento).
+                    <br>
+                    2.	Agregar otro servidor igual o más rápido (Siempre funciona y es tanto eficaz como tolerante a fallo, pero puede ser costoso).
+                    <br>
+                    3.	Agregar un servidor más lento (Solución de último recurso que no se recomienda, ya que su incorporación puede mejorar o empeorar el rendimiento).
+                </ul>
+                <br>
+                <p class="description-theory">Cuando queramos ver si vale la pena o no agregar un servidor más lento, podemos utilizar el cálculo del rho (\(\rho_c\)) crítico, mejor conocido como el umbral critico de utilización, para llegar a una conclusión.</p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Si \( \rho_{M/M/1} > \rho_c \), entonces el sistema está adecuado y no se modifica.</li>
+                    <li>Si \( \rho_{M/M/1} < \rho_c \), entonces hay que aumentar la tasa de servicio.</li>
+                    <li>Si \( \rho_{M/M/1} = \rho_c \), entonces el sistema está justo; puede convenir aumentar la tasa de servicio debido a que la tasa de arribo está aumentando.</li>
+                </ul>
+                <br>
+                <p class="description-theory">Cuando tenemos que configurar un servidor más al sistema M/M/1, formando uno M/M/2, existen dos configuraciones posibles:</p>
+                <br>
+                <div class="info-section">
+                    <div class="info-container">
+                        <h2>Sistemas M/M/2 Sin Selección de Servidor</h2>
+                        <p class="description-theory">
+                            Cuando ambos servidores están libres, el cliente elige al azar (misma probabilidad de ir a cualquiera de los dos servidores). A largo plazo, la mitad de los clientes irá al servidor lento, disminuyendo la velocidad de sus cálculos.</p>
+                            <div class="img-container">
+                                <img width="500px" src="./images/mm2Image2.png" alt="mm2Image2" class="info-image">
+                            </div>
+                            <div class="info-container">
+                                <p class="description-theory">Estados:</p>
+                                <ul style="margin-left: 1.5rem;">
+                                    <li>Estado "0": Ambos servidores están libres.</li>
+                                    <li>Estado "1,0": Un servidor está ocupado y el otro está libre.</li>
+                                    <li>Estado "0,1": Un servidor está libre y el otro está ocupado.</li>
+                                    <li>Estado "2": Ambos servidores están ocupados.</li>
+                                    <li>Estado "3": Un servidor está ocupado y el otro está ocupado.</li>
+                                </ul>
+                                <br>
+                                <p class="description-theory">Entradas:</p>
+                                <ul style="margin-left: 1.5rem;">
+                                    <li>Cuando está en estado "0" y llega un cliente, tiene la misma probabilidad de ir al servidor rápido que de ir al servidor lento, entonces la mitad de la tasa de arribos aporta al servidor rápido y la otra mitad al lento.</li>
+                                    <li>Cuando está en estado "1,0", para pasar al estado "2" tiene que llegar un cliente e ir al servidor lento, que es el está libre y eso ocurre con tasa λ.</li>
+                                    <li>Cuando está en estado "0,1" y arriba un cliente, este va a ir al servidor rápido que es el que está ocioso y esto ocurre con tasa λ.</li>
+                                    <li>Cuando está en estado "2" y arriba un cliente, se pone en cola y eso ocurre con tasa λ, y así siguiendo.</li>
+                                </ul>
+                                <br>
+                                <p class="description-theory">Salidas:</p>
+                                <ul style="margin-left: 1.5rem;">
+                                    <li>Si el sistema está en estado "1,0" y sale un cliente, este está saliendo del servidor rápido y ocurre con la tasa del rápido, \(\mu_1\).</li>
+                                    <li>Si el sistema está en estado "0,1" y sale un cliente, está saliendo del servidor lento y sale con la tasa del lento, \(\mu_2\).</li>
+                                    <li>Cuando el sistema está en estado 2 tiene dos opciones: Vaciarse el lento y pasar al estado "1.0" con tasa \(\mu_2\); o vaciarse el rápido y eso ocurre con la tasa del servidor rápido, \(\mu_1\).</li>
+                                    <li>Si el sistema está en estado "3", para pasar al estado 2 puede salir el cliente que está en el servidor rápido o el que está en el lento, y eso ocurre con la tasa de servicio del sistema, porque las tasas se suman.</li>
+                                    <li>Del estado 4 al 3 también es con la tasa de salida del sistema, y así siguiendo para todos los estados superiores.</li>
+                                </ul>
+                            </div>
+                            <div class="formula-section">
+                                <ul>
+                                    <li>\[ \rho_c = 1 - \left(\frac{r*(1+r)}{(1+r^2)}\right)^2, \text{ donde } r = \frac{\mu_2}{\mu_1} \]</li>
+                                    <li>\[ \pi_0 = \frac{(1-\rho)}{(1-\rho+\frac{1}{a})}, \text{ donde } a = \frac{(2\mu_1*\mu_2)}{(\mu_1+\mu_2)} \]</li>
+                                    <li>\[ N = \frac{\lambda}{[(1-\rho)*(\lambda+(1-\rho)*a)]} \]</li>
+                                </ul>
+                                <br>
+                                <p class="description-theory">Donde:
+                                    <br>
+                                    • \(\rho_c\) es el umbral crítico de utilización
+                                    <br>
+                                    • \(r\) es la relación entre las tasas de servicio (\(\mu_2/\mu_1\))
+                                    <br>
+                                    • \(\pi_0\) es la probabilidad de que el sistema esté vacío
+                                    <br>
+                                    • \(a\) es un factor que relaciona las tasas de servicio
+                                    <br>
+                                    • \(N\) es el número medio de clientes en el sistema
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-section">
+                    <div class="info-container">
+                        <h2>Sistemas M/M/2 Con Selección de Servidor</h2>
+                        <p class="description-theory">Si ambos servidores están libres, el cliente siempre elige el servidor rápido, mejorando el rendimiento del sistema. De alguna manera se lo direcciona, ya sea por algún algoritmo o por alguien que le indica adónde ir.</p>
+                        <div class="img-container">
+                            <img width="500px" src="./images/mm2Image3.png" alt="mm2Image3" class="info-image">
+                        </div>
+                        <br>
+                        <p class="description-theory">Aunque las referencias son las misma que la configuración anterior, la diferencia produce cuando el sistema está en estado "0". Los dos servidores están libres y llega un cliente, el cliente que está arribando siempre va al servidor rápido. El sistema pasa del estado "0" al "1,0" siempre y lo hace con la tasa A, NUNCA pasa del estado "0" al "0,1". El resto de los pasajes son iguales que en el caso sin selección.</p>
+                        <br>
+                        <p class="description-theory">La única diferencia está en la llegada de un cliente cuando está en estado "0". Al estado "0,1" se puede llegar por la salida de un cliente cuando el sistema está en estado "2".</p>
+                        <div class="formula-section">
+                            <ul>
+                                <li>
+                                    \[ \rho_c^2 * (1 + r^2) - \rho_c(2 + r^2) - (2r - 1) * (11 + r) = 0 \]
+                                    <p class="description-theory" style="margin-left: 2rem;">Se obtiene \(\rho_c\) si se resuelve la cuadrática.</p>
+                                </li>
+                                <li>\[ \pi_0 = \frac{(1-\rho)}{(1-\rho+\frac{\lambda}{a'})}, \text{ donde } a' = \frac{(2\lambda+\mu)*(\mu_1*\mu_2)}{\mu*(\lambda+\mu_2)} \]
+                                </li>
+                                <li>\[ N = \frac{\lambda}{[(1-\rho)*(\lambda+(1-\rho)*a')]} \]</li>
+                            </ul>
+                            <br>
+                            <p class="description-theory">Donde:
+                                <br>
+                                • \(\rho_c\) es el umbral crítico de utilización
+                                <br>
+                                • \(r\) es la relación entre las tasas de servicio (\(\mu_2/\mu_1\))
+                                <br>
+                                • \(\pi_0\) es la probabilidad de que el sistema esté vacío
+                                <br>
+                                • \(a'\) es un factor que relaciona las tasas de servicio y llegada
+                                <br>
+                                • \(N\) es el número medio de clientes en el sistema
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="calculator-container">
+            <div class="calculator">
+                <div class="form-container">
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="arriboId">
+                                Introduzca una tasa de arribo (λ):
+                            </label>
+                            <input type="text" id="arriboId" class="input-field">
+                            <p class="error-message" id="error-arriboId"></p>
+                        </div>
+                        <div class="input-container">
+                            <label class="input-label" for="servicio1Id">
+                                Introduzca una tasa de servicio del servidor 1 (μ₁):
+                            </label>
+                            <input type="text" id="servicio1Id" class="input-field">
+                            <p class="error-message" id="error-servicio1Id"></p>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="servicio2Id">
+                                Introduzca una tasa de servicio del servidor 2 (μ₂):
+                            </label>
+                            <input type="text" id="servicio2Id" class="input-field">
+                            <p class="error-message" id="error-servicio2Id"></p>
+                        </div>
+                        <div class="input-container">
+                            <label class="input-label" for="clientesId">
+                                Introduzca la probabilidad de N clientes en el sistema (\(P_n\)):
+                            </label>
+                            <input type="text" id="clientesId" class="input-field">
+                            <p class="error-message" id="error-clientesId"></p>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="submit-button" id="submitId">Calcular</button>
+                    </div>
+                </div>
+                <div id="results" class="results-container" style="display: none;">
+                    <h3>Resultados</h3>
+                    <div class="results-section">
+                        <h4>Servidores a la Misma Velocidad</h4>
+                        <div class="results-grid" id="equal-servers-results">
+                            <div class="result-item">
+                                <h4>Intensidad de tráfico (ρ):</h4>
+                                <p id="result-rho-equal"></p>
+                            </div>
+                            <div class="result-item">
+                                <h4>Probabilidad de sistema vacío (π₀):</h4>
+                                <p id="result-pi0-equal"></p>
+                            </div>
+                            <div class="result-item">
+                                <h4>Número medio de clientes (N):</h4>
+                                <p id="result-N-equal"></p>
+                            </div>
+                            <div class="result-item">
+                                <h4>Probabilidad de n clientes:</h4>
+                                <p id="result-pn-equal"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="results-section" id="different-servers-section">
+                        <h4>Servidores a Diferentes Velocidades</h4>
+                        <div class="results-subsection">
+                            <h5>Sin Selección de Servidor</h5>
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <h4>Intensidad de tráfico (ρ):</h4>
+                                    <p id="result-rho-no-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Rho crítico (ρc):</h4>
+                                    <p id="result-rho-c-no-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Probabilidad de sistema vacío (π₀):</h4>
+                                    <p id="result-pi0-no-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Número medio de clientes (N):</h4>
+                                    <p id="result-N-no-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Probabilidad de n clientes:</h4>
+                                    <p id="result-pn-no-selection"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="results-subsection">
+                            <br>
+                            <h5>Con Selección de Servidor</h5>
+                            <div class="results-grid">
+                                <div class="result-item">
+                                    <h4>Intensidad de tráfico (ρ):</h4>
+                                    <p id="result-rho-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Rho crítico (ρc):</h4>
+                                    <p id="result-rho-c-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Probabilidad de sistema vacío (π₀):</h4>
+                                    <p id="result-pi0-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Número medio de clientes (N):</h4>
+                                    <p id="result-N-selection"></p>
+                                </div>
+                                <div class="result-item">
+                                    <h4>Probabilidad de n clientes:</h4>
+                                    <p id="result-pn-selection"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Accesos Rápidos</h3>
+                    <ul>
+                        <li><a href="./index.html">Inicio</a></li>
+                        <li><a href="./MM1.html">M/M/1</a></li>
+                        <li><a href="./MM1N.html">M/M/1/N</a></li>
+                        <li><a href="./MM2.html">M/M/2</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Link del proyecto</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ernesto J. Moretti. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/index.js"></script>
+    <script src="./js/MM2.js"></script>
+    <script src="./js/theme.js"></script>
+</body>
+</html>
