@@ -12,7 +12,7 @@ Esta aplicación web es una calculadora especializada en el análisis de sistema
  <a href="https://titomoretti.github.io/Calculadora-Teoria-de-Colas/">Haga click aquí.</a>
 
 ## Próximas Características
-- Implementación de más modelos de colas (M/M/2, M/G/1, etc.)
+- Implementación de más modelos de colas (M/G/1; M/D/1)
 
 ## Enlace al Proyecto
 [GitHub Repository](https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas)
