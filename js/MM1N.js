@@ -79,24 +79,20 @@ document.addEventListener('DOMContentLoaded', () => {
         //Utilización del sistema
         const rho = λ / μ;
         let P0, PB, tau, lambdaE, Ls, LQ, Ws, WQ, pn;
+        //Probabilidad del sistema vacío
+        P0 = (1 - rho) / (1 - Math.pow(rho, N + 1));
+        //Probabilidad de bloqueo
+        PB = Math.pow(rho, N) * (1 - rho) / (1 - Math.pow(rho, N + 1));
         if (rho === 1) {
-            //Probabilidad del sistema vacío
-            P0 = 1 / (N + 1);
-            //Probabilidad de bloqueo
-            PB = 1 / (N + 1);
             //Número promedio de clientes en el sistema
             Ls = N / 2;
             //Número promedio de clientes en la cola
-            LQ = (N * (N - 1)) / (2 * (N + 1));
+            LQ = Ls - (1 - Math.pow(rho, N)) * rho / (1 - Math.pow(rho, N + 1));
         } else {
-            //Probabilidad del sistema vacío
-            P0 = (1 - rho) / (1 - Math.pow(rho, N + 1));
-            //Probabilidad de bloqueo
-            PB = Math.pow(rho, N) * (1 - rho) / (1 - Math.pow(rho, N + 1));
             //Número promedio de clientes en el sistema
             Ls = (rho / (1 - rho)) - ((N + 1) * Math.pow(rho, N + 1)) / (1 - Math.pow(rho, N + 1));
             //Número promedio de clientes en la cola
-            LQ = Ls - (1 - Math.pow(rho, N)) * rho / (1 - Math.pow(rho, N + 1));
+            LQ = (N * (N - 1)) / (2 * (N + 1));
         }
         //Tasa de rechazos
         tau = λ * PB;

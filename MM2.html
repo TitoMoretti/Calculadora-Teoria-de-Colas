@@ -144,13 +144,6 @@
                     3.	Agregar un servidor más lento (Solución de último recurso que no se recomienda, ya que su incorporación puede mejorar o empeorar el rendimiento).
                 </ul>
                 <br>
-                <p class="description-theory">Cuando queramos ver si vale la pena o no agregar un servidor más lento, podemos utilizar el cálculo del rho (\(\rho_c\)) crítico, mejor conocido como el umbral critico de utilización, para llegar a una conclusión.</p>
-                <ul style="margin-left: 1.5rem;">
-                    <li>Si \( \rho_{M/M/1} > \rho_c \), entonces el sistema está adecuado y no se modifica.</li>
-                    <li>Si \( \rho_{M/M/1} < \rho_c \), entonces hay que aumentar la tasa de servicio.</li>
-                    <li>Si \( \rho_{M/M/1} = \rho_c \), entonces el sistema está justo; puede convenir aumentar la tasa de servicio debido a que la tasa de arribo está aumentando.</li>
-                </ul>
-                <br>
                 <p class="description-theory">Cuando tenemos que configurar un servidor más al sistema M/M/1, formando uno M/M/2, existen dos configuraciones posibles:</p>
                 <br>
                 <div class="info-section">
@@ -160,33 +153,6 @@
                             Cuando ambos servidores están libres, el cliente elige al azar (misma probabilidad de ir a cualquiera de los dos servidores). A largo plazo, la mitad de los clientes irá al servidor lento, disminuyendo la velocidad de sus cálculos.</p>
                             <div class="img-container">
                                 <img width="500px" src="./images/mm2Image2.png" alt="mm2Image2" class="info-image">
-                            </div>
-                            <div class="info-container">
-                                <p class="description-theory">Estados:</p>
-                                <ul style="margin-left: 1.5rem;">
-                                    <li>Estado "0": Ambos servidores están libres.</li>
-                                    <li>Estado "1,0": Un servidor está ocupado y el otro está libre.</li>
-                                    <li>Estado "0,1": Un servidor está libre y el otro está ocupado.</li>
-                                    <li>Estado "2": Ambos servidores están ocupados.</li>
-                                    <li>Estado "3": Un servidor está ocupado y el otro está ocupado.</li>
-                                </ul>
-                                <br>
-                                <p class="description-theory">Entradas:</p>
-                                <ul style="margin-left: 1.5rem;">
-                                    <li>Cuando está en estado "0" y llega un cliente, tiene la misma probabilidad de ir al servidor rápido que de ir al servidor lento, entonces la mitad de la tasa de arribos aporta al servidor rápido y la otra mitad al lento.</li>
-                                    <li>Cuando está en estado "1,0", para pasar al estado "2" tiene que llegar un cliente e ir al servidor lento, que es el está libre y eso ocurre con tasa λ.</li>
-                                    <li>Cuando está en estado "0,1" y arriba un cliente, este va a ir al servidor rápido que es el que está ocioso y esto ocurre con tasa λ.</li>
-                                    <li>Cuando está en estado "2" y arriba un cliente, se pone en cola y eso ocurre con tasa λ, y así siguiendo.</li>
-                                </ul>
-                                <br>
-                                <p class="description-theory">Salidas:</p>
-                                <ul style="margin-left: 1.5rem;">
-                                    <li>Si el sistema está en estado "1,0" y sale un cliente, este está saliendo del servidor rápido y ocurre con la tasa del rápido, \(\mu_1\).</li>
-                                    <li>Si el sistema está en estado "0,1" y sale un cliente, está saliendo del servidor lento y sale con la tasa del lento, \(\mu_2\).</li>
-                                    <li>Cuando el sistema está en estado 2 tiene dos opciones: Vaciarse el lento y pasar al estado "1.0" con tasa \(\mu_2\); o vaciarse el rápido y eso ocurre con la tasa del servidor rápido, \(\mu_1\).</li>
-                                    <li>Si el sistema está en estado "3", para pasar al estado 2 puede salir el cliente que está en el servidor rápido o el que está en el lento, y eso ocurre con la tasa de servicio del sistema, porque las tasas se suman.</li>
-                                    <li>Del estado 4 al 3 también es con la tasa de salida del sistema, y así siguiendo para todos los estados superiores.</li>
-                                </ul>
                             </div>
                             <div class="formula-section">
                                 <ul>
@@ -219,9 +185,6 @@
                             <img width="500px" src="./images/mm2Image3.png" alt="mm2Image3" class="info-image">
                         </div>
                         <br>
-                        <p class="description-theory">Aunque las referencias son las misma que la configuración anterior, la diferencia produce cuando el sistema está en estado "0". Los dos servidores están libres y llega un cliente, el cliente que está arribando siempre va al servidor rápido. El sistema pasa del estado "0" al "1,0" siempre y lo hace con la tasa A, NUNCA pasa del estado "0" al "0,1". El resto de los pasajes son iguales que en el caso sin selección.</p>
-                        <br>
-                        <p class="description-theory">La única diferencia está en la llegada de un cliente cuando está en estado "0". Al estado "0,1" se puede llegar por la salida de un cliente cuando el sistema está en estado "2".</p>
                         <div class="formula-section">
                             <ul>
                                 <li>
@@ -256,14 +219,14 @@
                     <div class="input-row">
                         <div class="input-container">
                             <label class="input-label" for="arriboId">
-                                Introduzca una tasa de arribo (λ):
+                                Introduzca una tasa de arribo (λ): *
                             </label>
                             <input type="text" id="arriboId" class="input-field">
                             <p class="error-message" id="error-arriboId"></p>
                         </div>
                         <div class="input-container">
                             <label class="input-label" for="servicio1Id">
-                                Introduzca una tasa de servicio del servidor 1 (μ₁):
+                                Introduzca una tasa de servicio del servidor 1 (μ₁): *
                             </label>
                             <input type="text" id="servicio1Id" class="input-field">
                             <p class="error-message" id="error-servicio1Id"></p>
@@ -272,7 +235,7 @@
                     <div class="input-row">
                         <div class="input-container">
                             <label class="input-label" for="servicio2Id">
-                                Introduzca una tasa de servicio del servidor 2 (μ₂):
+                                Introduzca una tasa de servicio del servidor 2 (μ₂): *
                             </label>
                             <input type="text" id="servicio2Id" class="input-field">
                             <p class="error-message" id="error-servicio2Id"></p>

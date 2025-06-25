@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return value.replace(/[^0-9.]/g, '');
     }
 
-    // Mostrar y ocultar errores
+    //Mostrar y ocultar errores
     function showError(inputId, message) {
         const errorElement = document.getElementById(`error-${inputId}`);
         if (errorElement) {
@@ -102,21 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Cálculos para servidores a la misma velocidad
     function calculateMM2EqualServers(λ, μ1, μ2, n) {
-        if (μ1 !== μ2) {
-            throw new Error('Las tasas de servicio deben ser iguales');
-        }
-
         //Tasa de servicio individual
         const μ = μ1;
         //Tasa de servicio total
         const μs = 2 * μ;
         //Utilización del sistema
         const ρ = λ / μs;
-
-        if (ρ >= 1) {
-            throw new Error('El sistema está sobrecargado');
-        }
-
         //Probabilidad del sistema vacío
         const π0 = 1 - ρ;
         //Número promedio de clientes en el sistema
@@ -133,19 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const μs = μ1 + μ2;
         //Utilización del sistema
         const ρ = λ / μs;
-
-        if (ρ >= 1) {
-            throw new Error('El sistema está sobrecargado');
-        }
-
         //Relación entre las tasas de servicio
         const r = μ2 / μ1;
         //Umbral crítico de utilización
-        const ρc = 1 - Math.pow((r * (1 + r)) / (1 + Math.pow(r, 2)), 2);
+        const ρc = 1 - Math.pow((r * (1 + r)) / (1 + Math.pow(r, 2)), 0.5);
         //Factor de utilización
         const a = (2 * μ1 * μ2) / (μ1 + μ2);
         //Probabilidad del sistema vacío
-        const π0 = (1 - ρ) / (1 - ρ + 1/a);
+        const π0 = (1 - ρ) / (1 - ρ + λ/a);
         //Número promedio de clientes en el sistema
         const N = λ / ((1 - ρ) * (λ + (1 - ρ) * a));
         //Probabilidad de N clientes en el sistema
@@ -160,11 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const μs = μ1 + μ2;
         //Utilización del sistema
         const ρ = λ / μs;
-
-        if (ρ >= 1) {
-            throw new Error('El sistema está sobrecargado');
-        }
-
         //Relación entre las tasas de servicio
         const r = μ2 / μ1;
         //Factor de utilización
@@ -218,6 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('result-N-equal').textContent = formatNumber(equalResults.N);
             if (equalResults.pn !== null) {
                 document.getElementById('result-pn-equal').textContent = formatPercentage(equalResults.pn);
+            } else{
+                document.getElementById('result-pn-equal').textContent = '';
             }
         } else if (noSelectionResults && withSelectionResults) {
             //Servidores diferentes
@@ -230,6 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('result-N-no-selection').textContent = formatNumber(noSelectionResults.N);
             if (noSelectionResults.pn !== null) {
                 document.getElementById('result-pn-no-selection').textContent = formatPercentage(noSelectionResults.pn);
+            } else {
+                document.getElementById('result-pn-no-selection').textContent = '';
             }
 
             //Con selección
@@ -239,6 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('result-N-selection').textContent = formatNumber(withSelectionResults.N);
             if (withSelectionResults.pn !== null) {
                 document.getElementById('result-pn-selection').textContent = formatPercentage(withSelectionResults.pn);
+            } else {
+                document.getElementById('result-pn-selection').textContent = '';
             }
         }
 
