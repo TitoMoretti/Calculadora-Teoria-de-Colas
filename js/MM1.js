@@ -154,20 +154,21 @@ document.addEventListener('DOMContentLoaded', () => {
             clearResults();
             
             //Formatear números a 4 decimales
-            const formatNumber = (num) => {
+            const formatNumber = (num, isInfinity) => {
+                if (isInfinity) return '∞';
                 if (isNaN(num) || !isFinite(num)) {
                     return 'Error';
                 }
                 return num.toFixed(4);
             };
-
-            document.getElementById('result-rho').textContent = formatNumber(results.rho);
+            const isInfinity = results.rho === 1;
+            document.getElementById('result-rho').textContent = formatNumber(results.rho, false);
             document.getElementById('result-p0').textContent = 
-                `${formatNumber(results.p0)} = ${(results.p0 * 100).toFixed(2)}%`;
-            document.getElementById('result-lq').textContent = formatNumber(results.lq);
-            document.getElementById('result-l').textContent = formatNumber(results.l);
-            document.getElementById('result-wq').textContent = formatNumber(results.wq);
-            document.getElementById('result-w').textContent = formatNumber(results.w);
+                `${formatNumber(results.p0, false)} = ${(results.p0 * 100).toFixed(2)}%`;
+            document.getElementById('result-lq').textContent = formatNumber(results.lq, isInfinity);
+            document.getElementById('result-l').textContent = formatNumber(results.l, isInfinity);
+            document.getElementById('result-wq').textContent = formatNumber(results.wq, isInfinity);
+            document.getElementById('result-w').textContent = formatNumber(results.w, isInfinity);
 
             // Mostrar probabilidades relacionadas con N solo si N está definido
             if (N !== undefined && N !== null && N !== '' && !isNaN(N)) {
@@ -182,16 +183,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 document.getElementById('result-pn').textContent = 
-                    `${formatNumber(results.pn)} = ${(results.pn * 100).toFixed(2)}%`;
+                    `${formatNumber(results.pn, false)} = ${(results.pn * 100).toFixed(2)}%`;
                 // Calcular los primeros tres valores de la sumatoria
                 const pn0 = results.p0 * Math.pow(results.rho, N);
                 const pn1 = results.p0 * Math.pow(results.rho, Number(N) + 1);
                 const pn2 = results.p0 * Math.pow(results.rho, Number(N) + 2);
-                // Mostrar la ecuación de la sumatoria para al menos N clientes con los valores numéricos
                 document.getElementById('result-pn-at-least').innerHTML =
                     `$$P(\\geq ${N}) = P_{${N}} + P_{${Number(N)+1}} + P_{${Number(N)+2}} + \\ldots = ${pn0.toFixed(4)} + ${pn1.toFixed(4)} + ${pn2.toFixed(4)} + \\ldots$$`;
                 document.getElementById('result-pn-at-most').textContent = 
-                    `${formatNumber(results.pAtMostN)} = ${(results.pAtMostN * 100).toFixed(2)}%`;
+                    `${formatNumber(results.pAtMostN, false)} = ${(results.pAtMostN * 100).toFixed(2)}%`;
                 if (window.MathJax) {
                     MathJax.typesetPromise();
                 }
