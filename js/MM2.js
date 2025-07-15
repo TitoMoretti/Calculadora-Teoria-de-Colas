@@ -100,30 +100,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return clearError(inputId);
     }
 
-    //Cálculos para servidores a la misma velocidad
-    function calculateMM2EqualServers(λ, μ1, μ2, n) {
-        //Tasa de servicio individual
-        const μ = μ1;
-        //Tasa de servicio total
-        const μs = 2 * μ;
-        //Utilización del sistema
-        const ρ = λ / μs;
-        //Probabilidad del sistema vacío
-        const π0 = 1 - ρ;
-        //Número promedio de clientes en el sistema
-        const N = λ / ((1 - ρ) * (λ + (1 - ρ) * μs));
-        //Probabilidad de N clientes en el sistema
-        const pn = n !== undefined ? π0 * Math.pow(ρ, n) : null;
-
-        return { ρ, π0, N, pn };
-    }
-
-    //Cálculos para servidores a diferentes velocidades sin selección
-    function calculateMM2NoSelection(λ, μ1, μ2, n) {
+    function calculateMM2General(λ, μ1, μ2, n) {
         //Tasa de servicio total
         const μs = μ1 + μ2;
         //Utilización del sistema
         const ρ = λ / μs;
+        //Longitud promedio del sistema
+        const Ls = ρ / (1 - ρ);
+        //Longitud promedio de la cola
+        const LQ = Math.pow(ρ, 2) / (1 - ρ);
+        //Tiempo promedio en el sistema
+        const Ws = Ls / λ;
+        //Tiempo promedio en la cola
+        const WQ = LQ / λ;
+        //Probabilidad de N clientes en el sistema
+        const pn = n !== undefined ? (1 - ρ) * Math.pow(ρ, n) : null;
+
+        return { μs, ρ, Ls, LQ, Ws, WQ, pn };
+    }
+
+    //Cálculos para servidores a la misma velocidad
+    function calculateMM2EqualServers(ρ, Ls) {
+        //Probabilidad de que el sistema esté vacío
+        const P0 = 1 - ρ;
+        //Número promedio de clientes en el sistema (Teorema de Little)
+        const N = Ls;
+        return { P0, N };
+    }
+
+    //Cálculos para servidores a diferentes velocidades sin selección
+    function calculateMM2NoSelection(λ, μ1, μ2, ρ) {
         //Relación entre las tasas de servicio
         const r = μ2 / μ1;
         //Umbral crítico de utilización
@@ -134,18 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const π0 = (1 - ρ) / (1 - ρ + λ/a);
         //Número promedio de clientes en el sistema
         const N = λ / ((1 - ρ) * (λ + (1 - ρ) * a));
-        //Probabilidad de N clientes en el sistema
-        const pn = n !== undefined ? π0 * Math.pow(ρ, n) : null;
 
-        return { ρ, ρc, π0, N, pn };
+        return { ρc, π0, N };
     }
 
     //Cálculos para servidores a diferentes velocidades con selección
-    function calculateMM2WithSelection(λ, μ1, μ2, n) {
-        //Tasa de servicio total
-        const μs = μ1 + μ2;
-        //Utilización del sistema
-        const ρ = λ / μs;
+    function calculateMM2WithSelection(λ, μ1, μ2, ρ) {
         //Relación entre las tasas de servicio
         const r = μ2 / μ1;
         //Factor de utilización
@@ -158,80 +158,63 @@ document.addEventListener('DOMContentLoaded', () => {
         const discriminant = Math.pow(b, 2) - 4 * a * c;
         //Umbral crítico de utilización
         const ρc = (-b + Math.sqrt(discriminant)) / (2 * a);
-        //Tasa de servicio individual
-        const μ = μ1;
+        //Tasa de servicio total
+        const μ = μ1 + μ2;
         //Factor de utilización
         const aPrime = ((2 * λ + μ) * (μ1 * μ2)) / (μ * (λ + μ2));
         //Probabilidad del sistema vacío
         const π0 = (1 - ρ) / (1 - ρ + λ/aPrime);
         //Número promedio de clientes en el sistema
         const N = λ / ((1 - ρ) * (λ + (1 - ρ) * aPrime));
-        //Probabilidad de N clientes en el sistema
-        const pn = n !== undefined ? π0 * Math.pow(ρ, n) : null;
 
-        return { ρ, ρc, π0, N, pn };
+        return { ρc, π0, N };
     }
 
     //Formateo para Número y Probabilidades
-    function formatNumber(num) {
+    function formatNumber(num, isInfinity) {
+        if (isInfinity) {
+            return '∞';
+        }
         if (isNaN(num) || !isFinite(num)) {
             return 'Error';
         }
         return num.toFixed(4);
     }
 
-    function formatPercentage(value) {
-        return `${formatNumber(value)} = ${(value * 100).toFixed(2)}%`;
+    function formatPercentage(value, isInfinity) {
+        if (isInfinity) {
+            return '∞';
+        }
+        return `${formatNumber(value, false)} = ${(value * 100).toFixed(2)}%`;
     }
 
     //Mostrar resultados
-    function displayResults(equalResults, noSelectionResults, withSelectionResults, n) {
-        //Limpiar resultados anteriores
-        elements.equalServersSection.style.display = 'none';
-        elements.differentServersSection.style.display = 'none';
-
-        if (equalResults) {
-            //Servidores iguales
-            elements.equalServersSection.style.display = 'block';
-            
-            document.getElementById('result-rho-equal').textContent = formatNumber(equalResults.ρ);
-            document.getElementById('result-pi0-equal').textContent = formatPercentage(equalResults.π0);
-            document.getElementById('result-N-equal').textContent = formatNumber(equalResults.N);
-            if (equalResults.pn !== null) {
-                document.getElementById('result-pn-equal').textContent = formatPercentage(equalResults.pn);
-            } else{
-                document.getElementById('result-pn-equal').textContent = '';
-            }
-        } else if (noSelectionResults && withSelectionResults) {
-            //Servidores diferentes
-            elements.differentServersSection.style.display = 'block';
-
-            //Sin selección
-            document.getElementById('result-rho-no-selection').textContent = formatNumber(noSelectionResults.ρ);
-            document.getElementById('result-rho-c-no-selection').textContent = formatNumber(noSelectionResults.ρc);
-            document.getElementById('result-pi0-no-selection').textContent = formatPercentage(noSelectionResults.π0);
-            document.getElementById('result-N-no-selection').textContent = formatNumber(noSelectionResults.N);
-            if (noSelectionResults.pn !== null) {
-                document.getElementById('result-pn-no-selection').textContent = formatPercentage(noSelectionResults.pn);
-            } else {
-                document.getElementById('result-pn-no-selection').textContent = '';
-            }
-
-            //Con selección
-            document.getElementById('result-rho-selection').textContent = formatNumber(withSelectionResults.ρ);
-            document.getElementById('result-rho-c-selection').textContent = formatNumber(withSelectionResults.ρc);
-            document.getElementById('result-pi0-selection').textContent = formatPercentage(withSelectionResults.π0);
-            document.getElementById('result-N-selection').textContent = formatNumber(withSelectionResults.N);
-            if (withSelectionResults.pn !== null) {
-                document.getElementById('result-pn-selection').textContent = formatPercentage(withSelectionResults.pn);
-            } else {
-                document.getElementById('result-pn-selection').textContent = '';
-            }
+    function displayResults(generalResults, equalResults, noSelectionResults, withSelectionResults, isEqualServers) {
+        const isInfinity = generalResults.ρ === 1;
+        document.getElementById('general-results').style.display = 'block';
+        document.getElementById('result-mu-s-general').textContent = formatNumber(generalResults.μs, false);
+        document.getElementById('result-rho-general').textContent = formatNumber(generalResults.ρ, false);
+        document.getElementById('result-Ls-general').textContent = formatNumber(generalResults.Ls, isInfinity);
+        document.getElementById('result-Lq-general').textContent = formatNumber(generalResults.LQ, isInfinity);
+        document.getElementById('result-Ws-general').textContent = formatNumber(generalResults.Ws, isInfinity);
+        document.getElementById('result-Wq-general').textContent = formatNumber(generalResults.WQ, isInfinity);
+        document.getElementById('result-pn-general').textContent = generalResults.pn !== null ? formatPercentage(generalResults.pn, isInfinity) : '';
+        if (isEqualServers) {
+            document.getElementById('equal-servers-results').style.display = 'block';
+            document.getElementById('different-servers-results').style.display = 'none';
+            document.getElementById('result-pi0-equal').textContent = formatPercentage(equalResults.P0, isInfinity);
+            document.getElementById('result-N-equal').textContent = formatNumber(equalResults.N, isInfinity);
+        } else {
+            document.getElementById('equal-servers-results').style.display = 'none';
+            document.getElementById('different-servers-results').style.display = 'block';
+            document.getElementById('result-rho-c-no-selection').textContent = formatNumber(noSelectionResults.ρc, false);
+            document.getElementById('result-pi0-no-selection').textContent = formatPercentage(noSelectionResults.π0, isInfinity);
+            document.getElementById('result-N-no-selection').textContent = formatNumber(noSelectionResults.N, isInfinity);
+            document.getElementById('result-rho-c-selection').textContent = formatNumber(withSelectionResults.ρc, false);
+            document.getElementById('result-pi0-selection').textContent = formatPercentage(withSelectionResults.π0, isInfinity);
+            document.getElementById('result-N-selection').textContent = formatNumber(withSelectionResults.N, isInfinity);
         }
-
         elements.resultsContainer.style.display = 'block';
-
-        //Adicional: Actualizar MathJax si está disponible
         if (window.MathJax) {
             MathJax.typesetPromise();
         }
@@ -265,26 +248,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const μ1 = parseFloat(elements.inputs.servicio1.value);
                 const μ2 = parseFloat(elements.inputs.servicio2.value);
                 const n = elements.inputs.clientes.value ? parseFloat(elements.inputs.clientes.value) : undefined;
+                const isEqualServers = μ1 === μ2;
 
                 //Indicador de carga
                 elements.loadingIndicator.style.display = 'block';
 
-                //Cálculos
+                //Cálculos generales
+                const generalResults = calculateMM2General(λ, μ1, μ2, n);
                 let equalResults = null;
                 let noSelectionResults = null;
                 let withSelectionResults = null;
 
-                if (μ1 === μ2) {
-                    //Servidores iguales
-                    equalResults = calculateMM2EqualServers(λ, μ1, μ2, n);
+                if (isEqualServers) {
+                    equalResults = calculateMM2EqualServers(generalResults.ρ, generalResults.Ls);
                 } else {
-                    //Servidores diferentes
-                    noSelectionResults = calculateMM2NoSelection(λ, μ1, μ2, n);
-                    withSelectionResults = calculateMM2WithSelection(λ, μ1, μ2, n);
+                    noSelectionResults = calculateMM2NoSelection(λ, μ1, μ2, generalResults.ρ);
+                    withSelectionResults = calculateMM2WithSelection(λ, μ1, μ2, generalResults.ρ);
                 }
 
-                //Resultados
-                displayResults(equalResults, noSelectionResults, withSelectionResults, n);
+                // Mostrar resultados
+                displayResults(generalResults, equalResults, noSelectionResults, withSelectionResults, isEqualServers);
 
             } catch (error) {
                 console.error('Error en el cálculo:', error);

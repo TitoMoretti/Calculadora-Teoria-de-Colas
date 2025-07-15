@@ -87,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
             //Número promedio de clientes en el sistema
             Ls = N / 2;
             //Número promedio de clientes en la cola
-            LQ = Ls - (1 - Math.pow(rho, N)) * rho / (1 - Math.pow(rho, N + 1));
+            LQ = (N * (N - 1)) / (2 * (N + 1));
         } else {
             //Número promedio de clientes en el sistema
             Ls = (rho / (1 - rho)) - ((N + 1) * Math.pow(rho, N + 1)) / (1 - Math.pow(rho, N + 1));
             //Número promedio de clientes en la cola
-            LQ = (N * (N - 1)) / (2 * (N + 1));
+            LQ = Ls - (1 - Math.pow(rho, N)) * rho / (1 - Math.pow(rho, N + 1));
         }
         //Tasa de rechazos
         tau = λ * PB;
@@ -110,7 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const lb = LQ / (1 - P0);
         //Tiempo promedio de clientes en cola para un sistema ocupado
         const wb = WQ / (1 - P0);
-        return { rho, P0, PB, tau, lambdaE, Ls, LQ, Ws, WQ, pn, rhoE, lb, wb };
+        // Rendimiento a la Entrada
+        const gammaI = λ * (1 - PB);
+        // Rendimiento a la Salida
+        const gammaO = μ * (1 - P0);
+        return { rho, P0, PB, tau, lambdaE, Ls, LQ, Ws, WQ, pn, rhoE, lb, wb, gammaI, gammaO };
     }
 
     function clearResults() {
@@ -125,23 +129,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayResults(results, n, nInput) {
-        const formatNumber = (num) => (isNaN(num) || !isFinite(num)) ? 'Error' : num.toFixed(4);
-        const formatPercent = (num) => (isNaN(num) || !isFinite(num)) ? 'Error' : (num * 100).toFixed(2) + '%';
-        document.getElementById('result-rhoN').textContent = formatNumber(results.rho);
-        document.getElementById('result-p0N').textContent = `${formatNumber(results.P0)} = ${formatPercent(results.P0)}`;
-        document.getElementById('result-pbN').textContent = `${formatNumber(results.PB)} = ${formatPercent(results.PB)}`;
-        document.getElementById('result-tauN').textContent = formatNumber(results.tau);
-        document.getElementById('result-lambdaEN').textContent = formatNumber(results.lambdaE);
-        document.getElementById('result-lsN').textContent = formatNumber(results.Ls);
-        document.getElementById('result-lqN').textContent = formatNumber(results.LQ);
-        document.getElementById('result-wsN').textContent = formatNumber(results.Ws);
-        document.getElementById('result-wqN').textContent = formatNumber(results.WQ);
-        document.getElementById('result-rhoEN').textContent = formatNumber(results.rhoE);
-        document.getElementById('result-lbN').textContent = formatNumber(results.lb);
-        document.getElementById('result-wbN').textContent = formatNumber(results.wb);
+        const formatNumber = (num, isInfinity) => (isInfinity ? '∞' : (isNaN(num) || !isFinite(num)) ? 'Error' : num.toFixed(4));
+        const formatPercent = (num, isInfinity) => (isInfinity ? '∞' : (isNaN(num) || !isFinite(num)) ? 'Error' : (num * 100).toFixed(2) + '%');
+        const isInfinity = results.rho === 1;
+        document.getElementById('result-rhoN').textContent = formatNumber(results.rho, false);
+        document.getElementById('result-p0N').textContent = `${formatNumber(results.P0, false)} = ${formatPercent(results.P0, false)}`;
+        document.getElementById('result-pbN').textContent = `${formatNumber(results.PB, false)} = ${formatPercent(results.PB, false)}`;
+        document.getElementById('result-tauN').textContent = formatNumber(results.tau, false);
+        document.getElementById('result-lambdaEN').textContent = formatNumber(results.lambdaE, false);
+        document.getElementById('result-lsN').textContent = formatNumber(results.Ls, isInfinity);
+        document.getElementById('result-lqN').textContent = formatNumber(results.LQ, isInfinity);
+        document.getElementById('result-wsN').textContent = formatNumber(results.Ws, isInfinity);
+        document.getElementById('result-wqN').textContent = formatNumber(results.WQ, isInfinity);
+        document.getElementById('result-rhoEN').textContent = formatNumber(results.rhoE, false);
+        document.getElementById('result-gammaIN').textContent = formatNumber(results.gammaI, false);
+        document.getElementById('result-gammaON').textContent = formatNumber(results.gammaO, false);
+        document.getElementById('result-lbN').textContent = formatNumber(results.lb, isInfinity);
+        document.getElementById('result-wbN').textContent = formatNumber(results.wb, isInfinity);
         if (nInput !== undefined && nInput !== null && nInput !== '') {
             document.getElementById('result-nN').textContent = n;
-            document.getElementById('result-pnN').textContent = `${formatNumber(results.pn)} = ${formatPercent(results.pn)}`;
+            document.getElementById('result-pnN').textContent = `${formatNumber(results.pn, false)} = ${formatPercent(results.pn, false)}`;
         } else {
             document.getElementById('result-nN').textContent = '';
             document.getElementById('result-pnN').textContent = '';

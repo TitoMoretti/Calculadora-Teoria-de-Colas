@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoría de Colas: M/G/1</title>
+    <link rel="icon" href="./images/head-icon.png" type="image/png">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/models.css">
+    <link rel="stylesheet" href="./styles/normalize.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-content">
+                <div class="nav-left">
+                    <button class="menu-button">☰</button>
+                    <a href="./index.html" class="nav-title">Teoría de Colas</a>
+                    <div class="nav-links">
+                        <a href="./MM1.html">M/M/1</a>
+                        <a href="./MM1N.html">M/M/1/N</a>
+                        <a href="./MM2.html">M/M/2</a>
+                        <a href="./MG1.html">M/G/1</a>
+                        <a href="./MD1.html">M/D/1</a>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <p class="author-text">Modelización Numérica</p>
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Modelo M/G/1</h2>
+                <p class="description-theory">
+                    El modelo M/G/1 es un tipo de sistema de colas que comparte algunas características del M/M/1 (arribos y servicios aleatorios (de tipo Markoviano) y un solo servidor)
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Los arribos se distribuyen por Poisson.</li>
+                        <li>Hay una sola cola y un solo servidor que atiende de a un cliente a la vez.</li>
+                        <li>Las salidas son independientes de las entradas.</li>
+                        <li>La disciplina de la cola es FIFO (First In First Out).</li>
+                    </ul>
+                    <br>
+                    Pero estos se caracterizan por tener un tiempo de servicio que no sigue una distribución exponencial, sino que sigue una distribución general (de ahí el nombre M/G/1).
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Todos estos valores tienen un valor medio que se conoce como el Desvío Estándar.</li>
+                        <li>La Varianza es el cuadrado del desvío estándar.</li>
+                    </ul>
+                </p>
+             </div>
+        </div>
+        <div class="info-section">
+            <div class="info-container">
+                <h2>Fórmulas</h2>
+                <div class="formula-section">
+                    <ul>
+                        <li>\( \mu = \frac{1}{E(S)} \)</li>
+                        <li>\( E(S) = \frac{\lambda}{\mu} \)</li>
+                        <li>\( E(n) = \frac{\rho}{1-\rho} \left[1 - \frac{\rho}{2}(1-\mu^2\sigma^2)\right] = \lambda \cdot E(T) \)</li>
+                        <li>\( E(T) = \frac{1}{\mu (1-\rho)} \left[1 - \frac{\rho}{2}(1-\mu^2\sigma^2)\right] = \frac{E(n)}{\lambda} \)</li>
+                        <li>\( Var = \sigma^2  \)</li>
+                    </ul>
+                    <br>
+                    <p class="description-theory">Donde:
+                        <br>
+                        • \(E(S)\) es la esperanza matemática del tiempo de servicio.<br>
+                        • \(E(n)\) es la esperanza matemática del número de clientes en el sistema.<br>
+                        • \(\rho\) es la utilización del sistema.<br>
+                        • \(Var\) es la varianza del tiempo de servicio.<br>
+                        • \(E(T)\) es la esperanza matemática del tiempo de permanencia de los clientes en el sistema.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="calculator-container">
+            <div class="calculator">
+                <div class="form-container">
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="arriboIdN">
+                                Introduzca una tasa de arribo (λ): *
+                            </label>
+                            <input type="text" id="arriboIdN" class="input-field">
+                            <p class="error-message" id="error-arriboIdN"></p>
+                        </div>
+                    </div>
+                    <p>Introduzca una de las siguientes opciones: *</p>
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="servicioIdN_mu">
+                                Opción 1: Una tasa de servicio (μ):
+                            </label>
+                            <input type="text" id="servicioIdN_mu" class="input-field">
+                            <p class="error-message" id="error-servicioIdN_mu"></p>
+                        </div>
+                        <div class="input-container">
+                            <label class="input-label" for="servicioIdN_es">
+                                Opción 2: La esperanza matemática del tiempo de servicio (\(E(S)\)):
+                            </label>
+                            <input type="text" id="servicioIdN_es" class="input-field">
+                            <p class="error-message" id="error-servicioIdN_es"></p>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-container">
+                            <label class="input-label" for="desvioIdN">
+                                Introduzca el desvío estándar del tiempo de servicio (σ): *
+                            </label>
+                            <input type="text" id="desvioIdN" class="input-field">
+                            <p class="error-message" id="error-desvioIdN"></p>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="submit-button" id="submitIdN">Calcular</button>
+                    </div>
+                </div>
+                <div id="resultsN" class="results-container" style="display: none;">
+                    <h3>Resultados</h3>
+                    <div class="results-grid">
+                        <div class="result-item"><h4>Tasa de servicio (μ):</h4><p id="result-muN"></p></div>
+                        <div class="result-item"><h4>Esperanza matemática del tiempo de servicio (E(S)):</h4><p id="result-esN"></p></div>
+                        <div class="result-item"><h4>Intensidad de tráfico (ρ):</h4><p id="result-rhoN"></p></div>
+                        <div class="result-item"><h4>Esperanza matemática del número de clientes en el sistema (E(n)):</h4><p id="result-enN"></p></div>
+                        <div class="result-item"><h4>Esperanza matemática del tiempo de permanencia en el sistema (E(T)):</h4><p id="result-etN"></p></div>
+                        <div class="result-item"><h4>Varianza del tiempo de servicio (Var):</h4><p id="result-varN"></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Accesos Rápidos</h3>
+                    <ul>
+                        <li><a href="./index.html">Inicio</a></li>
+                        <li><a href="./MM1.html">M/M/1</a></li>
+                        <li><a href="./MM1N.html">M/M/1/N</a></li>
+                        <li><a href="./MM2.html">M/M/2</a></li>
+                        <li><a href="./MG1.html">M/G/1</a></li>
+                        <li><a href="./MD1.html">M/D/1</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Link del proyecto</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ernesto J. Moretti. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/index.js"></script>
+    <script src="./js/MG1.js"></script>
+    <script src="./js/theme.js"></script>
+</body>
+</html>
