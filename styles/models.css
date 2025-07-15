@@ -1,276 +1,276 @@
 /*Info Section*/
 .info-section {
-    flex-direction: column;
-    gap: 2rem;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .img-container {
-    margin-top: 1rem;
-    border-radius: var(--border-radius);
-    overflow: hidden;
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .formula-section {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background-color: var(--card-background);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-speed) ease;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-speed) ease;
 }
 
 .formula-section:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .formula-section ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .formula-section li {
-    background-color: var(--formula-background);
-    padding: 0.75rem 1.25rem;
-    border-radius: var(--border-radius);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    transition: all var(--transition-speed) ease;
+  background-color: var(--formula-background);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--border-radius);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  transition: all var(--transition-speed) ease;
 }
 
 .formula-section li:hover {
-    background-color: var(--formula-hover);
-    transform: translateY(-2px);
+  background-color: var(--formula-hover);
+  transform: translateY(-2px);
 }
 
 /*Calculator*/
 .calculator-container {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .calculator {
-    background-color: var(--card-background);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-lg);
-    padding: 2rem;
-    transition: all var(--transition-speed) ease;
-    animation: fadeIn 0.5s ease-in-out;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  transition: all var(--transition-speed) ease;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .calculator:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .input-row {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
 .input-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .input-label {
-    font-weight: 500;
-    color: var(--text-color);
-    font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.95rem;
 }
 
 .input-field {
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--input-border);
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    transition: all var(--transition-speed) ease;
-    background-color: var(--input-background);
-    color: var(--text-color);
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--input-border);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: all var(--transition-speed) ease;
+  background-color: var(--input-background);
+  color: var(--text-color);
 }
 
 .input-field:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    background-color: var(--card-background);
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background-color: var(--card-background);
 }
 
 .input-field.error {
-    border-color: #ef4444;
-    background-color: rgba(239, 68, 68, 0.05);
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.05);
 }
 
 .error-message {
-    color: #ef4444;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: none;
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: none;
 }
 
 .button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
 .submit-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 0.875rem 2.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-speed) ease;
-    box-shadow: var(--shadow-sm);
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.875rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .submit-button:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .submit-button:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .submit-button:disabled {
-    background-color: #94a3b8;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /*Resultados*/
 .results-container {
-    margin-top: 2rem;
-    padding: 2rem;
-    background-color: var(--card-background);
-    border-radius: var(--border-radius);
-    border-left: 4px solid var(--primary-color);
-    box-shadow: var(--shadow-lg);
-    animation: fadeIn 0.5s ease;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.5s ease;
 }
 
 .results-container h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .results-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
 .result-item {
-    padding: 1.5rem;
-    background-color: var(--result-background);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-speed) ease;
+  padding: 1.5rem;
+  background-color: var(--result-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed) ease;
 }
 
 .result-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .result-item h4 {
-    color: var(--text-color);
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-    font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .result-item p {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
 .probability-section {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background-color: var(--result-background);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-sm);
-    transition: all var(--transition-speed) ease;
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--result-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed) ease;
 }
 
 .probability-section:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .probability-section h4 {
-    color: var(--text-color);
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-    font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .probability-section p {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
 /*Responsive*/
 @media (max-width: 768px) {
-    .input-row {
-        flex-direction: column;
-        gap: 1rem;
-    }
+  .input-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .calculator {
-        padding: 1.5rem;
-    }
+  .calculator {
+    padding: 1.5rem;
+  }
 
-    .results-grid {
-        grid-template-columns: 1fr;
-    }
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .formula-section ul {
-        flex-direction: column;
-    }
+  .formula-section ul {
+    flex-direction: column;
+  }
 
-    .formula-section li {
-        width: 100%;
-        text-align: center;
-    }
+  .formula-section li {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /*Indicador de carga*/
 .loading-indicator {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 3px solid var(--input-border);
-    border-radius: 50%;
-    border-top-color: var(--primary-color);
-    animation: spin 1s linear infinite;
-    margin-right: 0.5rem;
-    vertical-align: middle;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid var(--input-border);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,135 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teoría de Colas</title>
-    <link rel="icon" href="./images/head-icon.png" type="image/png">
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="./styles/normalize.css">
-</head>
-<body>
+    <link rel="icon" href="./images/head-icon.png" type="image/png" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/normalize.css" />
+  </head>
+  <body>
     <header>
-        <nav>
-            <div class="nav-content">
-                <div class="nav-left">
-                    <button class="menu-button">☰</button>
-                    <a href="./index.html" class="nav-title">Teoría de Colas</a>
-                    <div class="nav-links">
-                        <a href="./MM1.html">M/M/1</a>
-                        <a href="./MM1N.html">M/M/1/N</a>
-                        <a href="./MM2.html">M/M/2</a>
-                        <a href="./MG1.html">M/G/1</a>
-                        <a href="./MD1.html">M/D/1</a>
-                    </div>
-                </div>
-                <div class="nav-right">
-                    <p class="author-text">Modelización Numérica</p>
-                    <button class="theme-toggle" aria-label="Toggle theme">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        </svg>
-                    </button>
-                </div>
+      <nav>
+        <div class="nav-content">
+          <div class="nav-left">
+            <button class="menu-button">☰</button>
+            <a href="./index.html" class="nav-title">Teoría de Colas</a>
+            <div class="nav-links">
+              <a href="./MM1.html">M/M/1</a>
+              <a href="./MM1N.html">M/M/1/N</a>
+              <a href="./MM2.html">M/M/2</a>
+              <a href="./MG1.html">M/G/1</a>
+              <a href="./MD1.html">M/D/1</a>
             </div>
-        </nav>
+          </div>
+          <div class="nav-right">
+            <p class="author-text">Modelización Numérica</p>
+            <button class="theme-toggle" aria-label="Toggle theme">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
+            </button>
+          </div>
+        </div>
+      </nav>
     </header>
     <main>
-        <div class="info-section">
-            <div class="info-container">
-                <h2>¿Qué es la Teoría de Colas?</h2>
-                <p class="description-theory">
-                    La teoría de colas es una rama de la investigación operativa que estudia el comportamiento de las líneas de espera (colas) para optimizar procesos de servicio. No es axiomática, lo que significa que muchos de sus métodos se basan en observaciones empíricas y no en demostraciones formales.
-                </p>
-            </div>
-            <div class="img-container">
-                <img src="./images/image1.png" alt="Teoría de colas" class="info-image">
-            </div>
+      <div class="info-section">
+        <div class="info-container">
+          <h2>¿Qué es la Teoría de Colas?</h2>
+          <p class="description-theory">
+            La teoría de colas es una rama de la investigación operativa que
+            estudia el comportamiento de las líneas de espera (colas) para
+            optimizar procesos de servicio. No es axiomática, lo que significa
+            que muchos de sus métodos se basan en observaciones empíricas y no
+            en demostraciones formales.
+          </p>
         </div>
-        <div class="info-section">
-            <div class="info-container">
-                <h2>¿Qué es un Sistema de Colas?</h2>
-                <p class="description-theory">
-                    Un sistema de colas es un modelo que representa situaciones donde clientes (personas, datos, productos, etc.) solicitan un servicio y deben esperar su turno en un área de espera. El sistema está compuesto por tres elementos principales:
-                    <br>
-                    • Clientes: quienes demandan el servicio.
-                    <br>
-                    • Área de espera: lugar físico o virtual donde los clientes esperan.
-                    <br>
-                    • Servidores: encargados de prestar el servicio (pueden ser personas, máquinas, computadoras, routers, etc.).
-                    <br><br>
-                    El comportamiento del sistema se estudia para analizar aspectos como los tiempos de espera, la cantidad de clientes en la cola y la eficiencia del servicio. Para describir un sistema de colas de forma precisa, se utiliza la notación de Kendall.
-                </p>
-            </div>
+        <div class="img-container">
+          <img
+            src="./images/image1.png"
+            alt="Teoría de colas"
+            class="info-image"
+          />
         </div>
-        <div class="info-section">
-            <div class="img-container">
-                <img src="./images/Kendall.jpg" alt="Kendall" class="info-image" style="max-width: 267px;">
-            </div>
-            <div class="info-container">
-                <h2>Notación de Kendall</h2>
-                <p class="description-theory">
-                    En los sistemas de colas nos interesa distinguir diferentes probabilidades, entre estas:
-                    <br>
-                    • La distribución de probabilidad de los arribos.
-                    <br>
-                    • La distribución de probabilidad de los tiempos que el servidor, o servidores, tarda con cada uno de los clientes. 
-                    <br>
-                    • La cantidad de servidores.
-                    <br><br>
-                    Ante esto, Kendall propuso una forma simple de expresar estas probabilidades de manera sintética usando la notación A/B/C, donde:
-                    <br>
-                    •	A: Distribución de los arribos.
-                    <br>
-                    •	B: Distribución de los tiempos de servicio.
-                    <br>
-                    •	C: Cantidad de servidores.
-                </p>
-            </div>
+      </div>
+      <div class="info-section">
+        <div class="info-container">
+          <h2>¿Qué es un Sistema de Colas?</h2>
+          <p class="description-theory">
+            Un sistema de colas es un modelo que representa situaciones donde
+            clientes (personas, datos, productos, etc.) solicitan un servicio y
+            deben esperar su turno en un área de espera. El sistema está
+            compuesto por tres elementos principales:
+            <br />
+            • Clientes: quienes demandan el servicio.
+            <br />
+            • Área de espera: lugar físico o virtual donde los clientes esperan.
+            <br />
+            • Servidores: encargados de prestar el servicio (pueden ser
+            personas, máquinas, computadoras, routers, etc.).
+            <br /><br />
+            El comportamiento del sistema se estudia para analizar aspectos como
+            los tiempos de espera, la cantidad de clientes en la cola y la
+            eficiencia del servicio. Para describir un sistema de colas de forma
+            precisa, se utiliza la notación de Kendall.
+          </p>
         </div>
-        <div class="info-section">
-            <div class="info-container">
-                <h2>Seleccione un Modelo:</h2>
-                <div class="model-options">
-                    <div class="model-option">
-                        <button class="model-MM1">M/M/1</button>
-                        <button class="model-MM1N">M/M/1/N</button>
-                        <button class="model-MM2">M/M/2</button>
-                        <button class="model-MG1">M/G/1</button>
-                        <button class="model-MD1">M/D/1</button>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="info-section">
+        <div class="img-container">
+          <img
+            src="./images/Kendall.jpg"
+            alt="Kendall"
+            class="info-image"
+            style="max-width: 267px"
+          />
         </div>
+        <div class="info-container">
+          <h2>Notación de Kendall</h2>
+          <p class="description-theory">
+            En los sistemas de colas nos interesa distinguir diferentes
+            probabilidades, entre estas:
+            <br />
+            • La distribución de probabilidad de los arribos.
+            <br />
+            • La distribución de probabilidad de los tiempos que el servidor, o
+            servidores, tarda con cada uno de los clientes.
+            <br />
+            • La cantidad de servidores.
+            <br /><br />
+            Ante esto, Kendall propuso una forma simple de expresar estas
+            probabilidades de manera sintética usando la notación A/B/C, donde:
+            <br />
+            • A: Distribución de los arribos.
+            <br />
+            • B: Distribución de los tiempos de servicio.
+            <br />
+            • C: Cantidad de servidores.
+          </p>
+        </div>
+      </div>
+      <div class="info-section">
+        <div class="info-container">
+          <h2>Seleccione un Modelo:</h2>
+          <div class="model-options">
+            <div class="model-option">
+              <button class="model-MM1">M/M/1</button>
+              <button class="model-MM1N">M/M/1/N</button>
+              <button class="model-MM2">M/M/2</button>
+              <button class="model-MG1">M/G/1</button>
+              <button class="model-MD1">M/D/1</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Accesos Rápidos</h3>
-                    <ul>
-                        <li><a href="./index.html">Inicio</a></li>
-                        <li><a href="./MM1.html">M/M/1</a></li>
-                        <li><a href="./MM1N.html">M/M/1/N</a></li>
-                        <li><a href="./MM2.html">M/M/2</a></li>
-                        <li><a href="./MG1.html">M/G/1</a></li>
-                        <li><a href="./MD1.html">M/D/1</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Link del proyecto</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas" target="_blank" rel="noopener noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        </a>
-                    </div>
-                </div>
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>Accesos Rápidos</h3>
+            <ul>
+              <li><a href="./index.html">Inicio</a></li>
+              <li><a href="./MM1.html">M/M/1</a></li>
+              <li><a href="./MM1N.html">M/M/1/N</a></li>
+              <li><a href="./MM2.html">M/M/2</a></li>
+              <li><a href="./MG1.html">M/G/1</a></li>
+              <li><a href="./MD1.html">M/D/1</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Link del proyecto</h3>
+            <div class="social-links">
+              <a
+                href="https://github.com/TitoMoretti/Calculadora-Teoria-de-Colas"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                  ></path>
+                </svg>
+              </a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Ernesto J. Moretti. Todos los derechos reservados.</p>
-            </div>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Ernesto J. Moretti. Todos los derechos reservados.</p>
+        </div>
+      </div>
     </footer>
     <script src="./js/index.js"></script>
     <script src="./js/theme.js"></script>
-</body>
+  </body>
 </html>
