@@ -229,6 +229,15 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--primary-color);
+  text-align: left;
+  overflow-x: auto;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.probability-section p, .probability-section .katex, .probability-section .MathJax {
+  text-align: left !important;
+  justify-content: flex-start !important;
 }
 
 /*Responsive*/

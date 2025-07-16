@@ -148,12 +148,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const w = l / (μ - λ);
       //Probabilidad de N clientes en el sistema
       const pn = p0 * Math.pow(rho, N);
-      // Probabilidad de al menos N clientes en el sistema: sum_{n=N}^{∞} Pn
-      let sumAtMostNMinus1 = 0;
-      for (let n = 0; n < N; n++) {
-        sumAtMostNMinus1 += p0 * Math.pow(rho, n);
-      }
-      const pAtLeastN = 1 - sumAtMostNMinus1;
+      // Probabilidad de al menos N clientes en el sistema: sum_{n=N}^{∞} Pn - Cálculo de los primeros tres valores de la sumatoria
+      const pN = p0 * Math.pow(rho, N);
+      const pN1 = p0 * Math.pow(rho, N + 1);
+      const pN2 = p0 * Math.pow(rho, N + 2);
       // Probabilidad de como máximo N clientes en el sistema: sum_{n=0}^{N} Pn
       let sumAtMostN = 0;
       for (let n = 0; n <= N; n++) {
@@ -161,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       const pAtMostN = sumAtMostN;
 
-      return { rho, p0, lq, l, wq, w, pn, pAtLeastN, pAtMostN };
+      return { rho, p0, lq, l, wq, w, pn, pAtMostN, pN, pN1, pN2 };
     } catch (error) {
       throw new Error(`Error en el cálculo: ${error.message}`);
     }
@@ -222,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("result-pn").textContent =
           `${formatNumber(results.pn, false)} = ${(results.pn * 100).toFixed(2)}%`;
         document.getElementById("result-pn-at-least").innerHTML =
-          `$$P(\\geq ${N}) = P_{${N}} + P_{${Number(N) + 1}} + P_{${Number(N) + 2}} + \\ldots$$`;
+          `$$P(\\geq ${N}) = P_{${N}} + P_{${Number(N) + 1}} + P_{${Number(N) + 2}} + \\ldots + P_{\\infty} = ${formatNumber(results.pN, false)} + ${formatNumber(results.pN1, false)} + ${formatNumber(results.pN2, false)} + \\ldots + P_{\\infty}$$`;
         document.getElementById("result-pn-at-most").textContent =
           `${formatNumber(results.pAtMostN, false)} = ${(results.pAtMostN * 100).toFixed(2)}%`;
         if (window.MathJax) {
