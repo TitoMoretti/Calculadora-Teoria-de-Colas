@@ -29,7 +29,7 @@ Ernesto J. Moretti
 Todos los derechos reservados © 2025 Ernesto J. Moretti
 
 ## Instalación y Uso
-
+Si decides tener la calculadora localmente, haz lo siguiente:
 1. Clona el repositorio:
 
 ```bash
