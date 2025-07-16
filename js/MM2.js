@@ -235,6 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
       generalResults.pn !== null
         ? formatPercentage(generalResults.pn, isInfinity)
         : "";
+    document.getElementById("result-n").textContent =
+      (typeof generalResults.pn === "number" && !isNaN(generalResults.pn) && elements.inputs.clientes.value)
+        ? elements.inputs.clientes.value
+        : "";
     if (isEqualServers) {
       document.getElementById("equal-servers-results").style.display = "block";
       document.getElementById("different-servers-results").style.display =

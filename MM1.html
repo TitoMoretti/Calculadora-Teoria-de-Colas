@@ -50,11 +50,11 @@
           <ul style="margin-left: 1.5rem">
             <li>
               Los clientes llegan siguiendo una distribución Poisson con una
-              tasa promedio de arribos λ (clientes por segundo).
+              tasa promedio de arribos \( \lambda \).
             </li>
             <li>
               El tiempo de servicio sigue una distribución exponencial con una
-              tasa promedio μ (clientes atendidos por segundo).
+              tasa promedio \( \mu \).
             </li>
             <li>
               Hay una sola cola y un solo servidor que atiende de a un cliente a
@@ -87,8 +87,8 @@
               <li>\( L_s = \frac{\lambda}{\mu - \lambda} \)</li>
               <li>\( W_q = \frac{\lambda}{\mu(\mu - \lambda)} \)</li>
               <li>\( W_s = \frac{1}{\mu - \lambda} \)</li>
-              <li>\( P(\geq N) = \sum_{n=N}^{\infty} P_n = \rho^N \)</li>
-              <li>\( P(\leq N) = \sum_{n=0}^{N} P_n = 1 - \rho^{N+1} \)</li>
+              <li>\( P(\geq N) = \sum_{n=N}^{\infty} P_n \)</li>
+              <li>\( P(\leq N) = \sum_{n=0}^{N} P_n \)</li>
             </ul>
             <br />
             <p class="description-theory">
@@ -126,14 +126,14 @@
             <div class="input-row">
               <div class="input-container">
                 <label class="input-label" for="arriboId">
-                  Introduzca una tasa de arribo (λ):
+                  Introduzca una tasa de arribo (\( \lambda \)=clientes/hora): *
                 </label>
                 <input type="text" id="arriboId" class="input-field" />
                 <p class="error-message" id="error-arriboId"></p>
               </div>
               <div class="input-container">
                 <label class="input-label" for="servicioId">
-                  Introduzca una tasa de servicio (μ):
+                  Introduzca una tasa de servicio (\( \mu \)=clientes/hora): *
                 </label>
                 <input type="text" id="servicioId" class="input-field" />
                 <p class="error-message" id="error-servicioId"></p>
@@ -156,27 +156,27 @@
             <h3>Resultados</h3>
             <div class="results-grid">
               <div class="result-item">
-                <h4>Intensidad de tráfico (ρ):</h4>
+                <h4>Intensidad de tráfico (\( \rho \)):</h4>
                 <p id="result-rho"></p>
               </div>
               <div class="result-item">
-                <h4>Probabilidad de 0 clientes en el sistema (P₀):</h4>
+                <h4>Probabilidad de 0 clientes en el sistema (\( P_0 \)):</h4>
                 <p id="result-p0"></p>
               </div>
               <div class="result-item">
-                <h4>Número promedio de clientes en la cola (Lq):</h4>
+                <h4>Número promedio de clientes en la cola (\( L_q \)):</h4>
                 <p id="result-lq"></p>
               </div>
               <div class="result-item">
-                <h4>Número promedio de clientes en el sistema (Ls):</h4>
+                <h4>Número promedio de clientes en el sistema (\( L_s \)):</h4>
                 <p id="result-l"></p>
               </div>
               <div class="result-item">
-                <h4>Tiempo promedio de espera en la cola (Wq):</h4>
+                <h4>Tiempo promedio de espera en la cola (\( W_q \)):</h4>
                 <p id="result-wq"></p>
               </div>
               <div class="result-item">
-                <h4>Tiempo promedio en el sistema (Ws):</h4>
+                <h4>Tiempo promedio en el sistema (\( W_s \)):</h4>
                 <p id="result-w"></p>
               </div>
             </div>

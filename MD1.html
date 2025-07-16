@@ -39,15 +39,19 @@
             <div class="info-container">
                 <h2>Modelo M/D/1</h2>
                 <p class="description-theory">
-                    El modelo M/D/1 es una espacialización de un sistema de colas M/G/1, una especialización de las M/G/1, pero aquí los tiempos de servicio son DETERMINÍSTICOS, no estocásticos (de ahí sale la D).
-                    Como se considera que todos los tiempos de servicio son iguales entre sí:
+                    El modelo M/D/1 es una espacialización de un sistema de colas M/G/1,
+                    pero aquí los tiempos de servicio son DETERMINÍSTICOS, no estocásticos
+                    (de ahí sale la D). Como se considera que todos los tiempos de servicio
+                    son iguales entre sí:
                     <ul style="margin-left: 1.5rem;">
-                        <li>El desvío estándar del tiempo de servicio es 0.</li>
-                        <li>No existe la varianza del tiempo de servicio.</li>
+                        <li>El Desvío Estándar (\( \sigma \)) del tiempo de servicio es 0.</li>
+                        <li>No existe Varianza (\( Var \)).</li>
                     </ul>
                     <br>
-                    Cabe aclarar que esto solo es una simplificación, ya que en la práctica los tiempos nunca son iguales, pero la diferencia entre estas es tan poca que consideran como si lo fueran.
-                    Por lo tanto, las fórmulas de este modelo son las mismas que las del modelo M/G/1, pero con un desvío estándar igual a 0.
+                    Cabe aclarar que esto solo es una simplificación, ya que en la práctica los
+                    tiempos nunca son iguales. Pero aquí la diferencia entre estas es tan poca
+                    que consideran como si lo fueran. Por lo tanto, las fórmulas de este modelo
+                    son las mismas que las del modelo M/G/1, pero con un Desvío Estándar igual a 0.
                     <br>
                 </p>
              </div>
@@ -58,19 +62,28 @@
                 <div class="formula-section">
                     <ul>
                         <li>\( \mu = \frac{1}{E(S)} \)</li>
-                        <li>\( E(S) = \frac{\lambda}{\mu} \)</li>                        
+                        <li>\( E(S) = \frac{1}{\mu} \)</li>
+                        <li>\( \rho = \frac{\lambda}{\mu} \)</li>
                         <li>\( E(n) = \frac{\rho}{1-\rho} \left[1 - \frac{\rho}{2}\right] = \lambda \cdot E(T) \)</li>
                         <li>\( E(T) = \frac{1}{\mu (1-\rho)} \left[1 - \frac{\rho}{2}\right] = \frac{E(n)}{\lambda} \)</li>
-                        <li>\( Var = \sigma = 0  \)</li>
+                        <li>\( \sigma = 0 \)</li>
+                        <li>\( Var = 0  \)</li>
                     </ul>
                     <br>
                     <p class="description-theory">Donde:
                         <br>
-                        • \(E(S)\) es la esperanza matemática del tiempo de servicio.<br>
-                        • \(E(n)\) es la esperanza matemática del número de clientes en el sistema.<br>
-                        • \(\rho\) es la utilización del sistema.<br>
-                        • \(Var\) es la varianza del tiempo de servicio.<br>
-                        • \(E(T)\) es la esperanza matemática del tiempo de permanencia de los clientes en el sistema.<br>
+                        • \(E(S)\) es la esperanza matemática del tiempo de servicio.
+                        <br>
+                        • \(E(n)\) es la esperanza matemática del número de clientes en el sistema.
+                        <br>
+                        • \(\rho\) es la utilización del sistema.
+                        <br>
+                        • \(\sigma\) es el desvío estándar.
+                        <br>
+                        • \(Var\) es la varianza del tiempo de servicio.
+                        <br>
+                        • \(E(T)\) es la esperanza matemática del tiempo de permanencia de los clientes en el sistema.
+                        <br>
                     </p>
                 </div>
             </div>
@@ -81,7 +94,7 @@
                     <div class="input-row">
                         <div class="input-container">
                             <label class="input-label" for="arriboIdN">
-                                Introduzca una tasa de arribo (λ): *
+                                Introduzca una tasa de arribo (\( \lambda \)=clientes/hora): *
                             </label>
                             <input type="text" id="arriboIdN" class="input-field">
                             <p class="error-message" id="error-arriboIdN"></p>
@@ -91,14 +104,14 @@
                     <div class="input-row">
                         <div class="input-container">
                             <label class="input-label" for="servicioIdN_mu">
-                                Opción 1: Una tasa de servicio (μ):
+                                Opción 1: Una tasa de servicio (\( \mu \)=clientes/hora):
                             </label>
                             <input type="text" id="servicioIdN_mu" class="input-field">
                             <p class="error-message" id="error-servicioIdN_mu"></p>
                         </div>
                         <div class="input-container">
                             <label class="input-label" for="servicioIdN_es">
-                                Opción 2: La esperanza matemática del tiempo de servicio (\(E(S)\)):
+                                Opción 2: La esperanza matemática del tiempo de servicio (\(E(S)\)=horas):
                             </label>
                             <input type="text" id="servicioIdN_es" class="input-field">
                             <p class="error-message" id="error-servicioIdN_es"></p>
@@ -111,11 +124,11 @@
                 <div id="resultsN" class="results-container" style="display: none;">
                     <h3>Resultados</h3>
                     <div class="results-grid">
-                        <div class="result-item"><h4>Tasa de servicio (μ):</h4><p id="result-muN"></p></div>
-                        <div class="result-item"><h4>Esperanza matemática del tiempo de servicio (E(S)):</h4><p id="result-esN"></p></div>
-                        <div class="result-item"><h4>Intensidad de tráfico (ρ):</h4><p id="result-rhoN"></p></div>
-                        <div class="result-item"><h4>Esperanza matemática del número de clientes en el sistema (E(n)):</h4><p id="result-enN"></p></div>
-                        <div class="result-item"><h4>Esperanza matemática del tiempo de permanencia en el sistema (E(T)):</h4><p id="result-etN"></p></div>
+                        <div class="result-item"><h4>Tasa de servicio (\( \mu \)):</h4><p id="result-muN"></p></div>
+                        <div class="result-item"><h4>Esperanza matemática del tiempo de servicio (\( E(S) \)):</h4><p id="result-esN"></p></div>
+                        <div class="result-item"><h4>Intensidad de tráfico (\( \rho \)):</h4><p id="result-rhoN"></p></div>
+                        <div class="result-item"><h4>Esperanza matemática del número de clientes en el sistema (\( E(n) \)):</h4><p id="result-enN"></p></div>
+                        <div class="result-item"><h4>Esperanza matemática del tiempo de permanencia en el sistema (\( E(T) \)):</h4><p id="result-etN"></p></div>
                     </div>
                 </div>
             </div>

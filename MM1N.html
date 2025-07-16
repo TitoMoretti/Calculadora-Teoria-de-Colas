@@ -51,11 +51,11 @@
           <ul style="margin-left: 1.5rem">
             <li>
               Los clientes llegan siguiendo una distribución Poisson con una
-              tasa promedio de arribos λ (clientes por segundo).
+              tasa promedio de arribos \( \lambda \).
             </li>
             <li>
               El tiempo de servicio sigue una distribución exponencial con una
-              tasa promedio μ (clientes atendidos por segundo).
+              tasa promedio \( \mu \).
             </li>
             <li>
               Hay una sola cola y un solo servidor que atiende de a un cliente a
@@ -125,17 +125,17 @@
             <p class="description-theory">
               Donde:
               <br />
-              • ρ es la intensidad de tráfico (utilización del sistema).
+              • \( \rho \) es la intensidad de tráfico (utilización del sistema).
               <br />
-              • P₀ es la probabilidad de que no haya clientes en el sistema.
+              • \( P_0 \) es la probabilidad de que no haya clientes en el sistema.
               <br />
               • \(P_n\) es la probabilidad de que haya n clientes en el sistema.
               <br />
               • \(P_B\) es la probabilidad de que haya N clientes en el sistema.
               <br />
-              • τ es la tasa de rechazos.
+              • \( \tau \) es la tasa de rechazos.
               <br />
-              • λ̄ es la tasa de llegada efectiva.
+              • \( \bar{\lambda} \) es la tasa de llegada efectiva.
               <br />
               • \(L_s\) es el número promedio de clientes en el sistema.
               <br />
@@ -145,7 +145,7 @@
               <br />
               • \(W_q\) es el tiempo promedio en la cola.
               <br />
-              • ρ̄ es la utilización efectiva del sistema.
+              • \( \bar{\rho} \) es la utilización efectiva del sistema.
               <br />
               • \(L_b\) es el número promedio de clientes en cola para un
               sistema ocupado.
@@ -166,14 +166,14 @@
             <div class="input-row">
               <div class="input-container">
                 <label class="input-label" for="arriboIdN">
-                  Introduzca una tasa de arribo (λ): *
+                  Introduzca una tasa de arribo (\( \lambda \)=clientes/hora): *
                 </label>
                 <input type="text" id="arriboIdN" class="input-field" />
                 <p class="error-message" id="error-arriboIdN"></p>
               </div>
               <div class="input-container">
                 <label class="input-label" for="servicioIdN">
-                  Introduzca una tasa de servicio (μ): *
+                  Introduzca una tasa de servicio (\( \mu \)=clientes/hora): *
                 </label>
                 <input type="text" id="servicioIdN" class="input-field" />
                 <p class="error-message" id="error-servicioIdN"></p>
@@ -182,7 +182,7 @@
             <div class="input-row">
               <div class="input-container">
                 <label class="input-label" for="poblacionIdN">
-                  Introduzca la capacidad máxima de clientes (N): *
+                  Introduzca la capacidad máxima de clientes (\( N \)): *
                 </label>
                 <input type="text" id="poblacionIdN" class="input-field" />
                 <p class="error-message" id="error-poblacionIdN"></p>
@@ -191,7 +191,7 @@
             <div class="input-row">
               <div class="input-container">
                 <label class="input-label" for="nClientesIdN">
-                  Número de clientes en el sistema (n):
+                  Número de clientes en el sistema (\( n \)):
                 </label>
                 <input type="text" id="nClientesIdN" class="input-field" />
                 <p class="error-message" id="error-nClientesIdN"></p>
@@ -205,64 +205,64 @@
             <h3>Resultados</h3>
             <div class="results-grid">
               <div class="result-item">
-                <h4>Intensidad de tráfico (ρ):</h4>
+                <h4>Intensidad de tráfico (\( \rho \)):</h4>
                 <p id="result-rhoN"></p>
               </div>
               <div class="result-item">
-                <h4>Probabilidad de sistema vacío (P₀):</h4>
+                <h4>Probabilidad de sistema vacío (\( P_0 \)):</h4>
                 <p id="result-p0N"></p>
               </div>
               <div class="result-item">
-                <h4>Probabilidad de bloqueo (P<sub>B</sub>):</h4>
+                <h4>Probabilidad de bloqueo (\( P_B \)):</h4>
                 <p id="result-pbN"></p>
               </div>
               <div class="result-item">
-                <h4>Tasa de rechazos (τ):</h4>
+                <h4>Tasa de rechazos (\( \tau \)):</h4>
                 <p id="result-tauN"></p>
               </div>
               <div class="result-item">
-                <h4>Tasa de llegada efectiva (λ̄):</h4>
+                <h4>Tasa de llegada efectiva (\( \bar{\lambda} \)):</h4>
                 <p id="result-lambdaEN"></p>
               </div>
               <div class="result-item">
-                <h4>Longitud promedio del sistema (L<sub>s</sub>):</h4>
+                <h4>Longitud promedio del sistema (\( L_s \)):</h4>
                 <p id="result-lsN"></p>
               </div>
               <div class="result-item">
-                <h4>Longitud promedio de la cola (L<sub>Q</sub>):</h4>
+                <h4>Longitud promedio de la cola (\( L_q \)):</h4>
                 <p id="result-lqN"></p>
               </div>
               <div class="result-item">
-                <h4>Tiempo promedio en el sistema (W<sub>s</sub>):</h4>
+                <h4>Tiempo promedio en el sistema (\( W_s \)):</h4>
                 <p id="result-wsN"></p>
               </div>
               <div class="result-item">
-                <h4>Tiempo promedio en la cola (W<sub>Q</sub>):</h4>
+                <h4>Tiempo promedio en la cola (\( W_q \)):</h4>
                 <p id="result-wqN"></p>
               </div>
               <div class="result-item">
-                <h4>Utilización efectiva del sistema (ρ̄):</h4>
+                <h4>Utilización efectiva del sistema (\( \bar{\rho} \)):</h4>
                 <p id="result-rhoEN"></p>
               </div>
               <div class="result-item">
-                <h4>Rendimiento a la Entrada (γ<sub>i</sub>):</h4>
+                <h4>Rendimiento a la Entrada (\( \gamma_i \)):</h4>
                 <p id="result-gammaIN"></p>
               </div>
               <div class="result-item">
-                <h4>Rendimiento a la Salida (γ<sub>o</sub>):</h4>
+                <h4>Rendimiento a la Salida (\( \gamma_o \)):</h4>
                 <p id="result-gammaON"></p>
               </div>
               <div class="result-item">
                 <h4>
                   Número promedio de clientes en cola para sistema ocupado
-                  (L<sub>b</sub>):
+                  (\( L_b \)):
                 </h4>
                 <p id="result-lbN"></p>
               </div>
               <div class="result-item">
                 <h4>
                   Tiempo promedio de clientes en cola para sistema ocupado
-                  (w<sub>b</sub>):
+                  (\( W_b \)):
                 </h4>
                 <p id="result-wbN"></p>
               </div>
@@ -270,7 +270,7 @@
             <div class="probability-section">
               <h4>
                 Probabilidad de <span id="result-nN"></span> clientes en el
-                sistema (P<sub>n</sub>):
+                sistema (\( P_n \)):
               </h4>
               <p id="result-pnN"></p>
             </div>
