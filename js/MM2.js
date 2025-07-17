@@ -243,15 +243,21 @@ document.addEventListener("DOMContentLoaded", () => {
         : "";
     //Mostrar resultados para servidores a la misma velocidad
     if (isEqualServers) {
+      console.log('equalResults:', equalResults, 'generalResults:', generalResults);
       document.getElementById("equal-servers-results").style.display = "block";
-      document.getElementById("different-servers-results").style.display =
-        "none";
-      document.getElementById("result-pi0-equal").textContent =
-        formatPercentage(equalResults.P0, isInfinity);
-      document.getElementById("result-N-equal").textContent = formatNumber(
-        equalResults.N,
-        isInfinity,
-      );
+      document.getElementById("different-servers-results").style.display = "none";
+      // Mostrar mensaje de error si los resultados no son válidos
+      if (isNaN(equalResults.P0) || isNaN(equalResults.N) || equalResults.P0 === undefined || equalResults.N === undefined) {
+        document.getElementById("result-pi0-equal").textContent = "Error en el cálculo. Verifique los datos de entrada.";
+        document.getElementById("result-N-equal").textContent = "";
+      } else {
+        document.getElementById("result-pi0-equal").textContent =
+          formatPercentage(equalResults.P0, isInfinity);
+        document.getElementById("result-N-equal").textContent = formatNumber(
+          equalResults.N,
+          isInfinity,
+        );
+      }
     //Mostrar resultados para servidores a diferentes velocidades
     } else {
       document.getElementById("equal-servers-results").style.display = "none";
