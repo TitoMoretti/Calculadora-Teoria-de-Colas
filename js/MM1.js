@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function sanitizeInput(value) {
     return value.replace(/[^0-9.]/g, "");
   }
-  //Formatear números a 4 decimales
+  //Formatear números a 4 decimales o infinito o error
   function formatNumber(num, isInfinity) {
     if (isInfinity) return "∞";
     if (isNaN(num) || !isFinite(num)) {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     inputElement.classList.remove("error");
     return true;
   }
-  //Actualizar encabezados
+  //Actualizar encabezados de las probabilidades
   function updateHeaders(N) {
     document.querySelectorAll("h4").forEach((h4) => {
       if (h4.textContent.includes("al menos")) {
@@ -71,10 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Validación de entradas
   function validateInput(value, inputId) {
+    //Sanitizar el valor de la entrada
     const sanitizedValue = sanitizeInput(value);
     if (sanitizedValue !== value) {
       document.getElementById(inputId).value = sanitizedValue;
     }
+    //Validación de la población
     if (inputId === "poblacionId") {
       if (!value.trim()) {
         clearError(inputId);
@@ -91,7 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return showError(inputId, "Máximo 4 decimales permitidos");
       }
       return clearError(inputId);
-    } else {
+    }
+    //Validación de las tasas de arribo y servicio
+    else {
       if (!value.trim()) {
         return showError(inputId, "Este campo es requerido");
       }
@@ -110,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (serviceRate && numValue >= serviceRate) {
           return showError(
             inputId,
-            "La tasa de arribo debe ser menor que la tasa de servicio",
+            "La tasa de arribo debe ser menor que la tasa de servicio. De lo contrario, el sistema será inestable (ρ ≥ 1), produciendo congestionamiento y resultados inválidos o infinitos.",
           );
         }
       }
@@ -119,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (arrivalRate && numValue <= arrivalRate) {
           return showError(
             inputId,
-            "La tasa de servicio debe ser mayor que la tasa de arribo",
+            "La tasa de servicio debe ser mayor que la tasa de arribo. De lo contrario, el sistema será inestable (ρ ≥ 1), produciendo congestionamiento y resultados inválidos o infinitos.",
           );
         }
       }
@@ -134,8 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const rho = λ / μ;
       //Validar probabilidad
       if (rho >= 1) {
-        throw new Error("El sistema está sobrecargado");
+        rho = rho + " (Sistema Inestable)";
       }
+      //Tiempo entre llegadas
+      const tllegada = 1 / λ;
+      //Tiempo medio de servicio
+      const ts = 1 / μ;
       //Probabilidad de no clientes en el sistema
       const p0 = 1 - rho;
       //Número promedio de clientes en la cola
@@ -148,18 +156,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const w = l / (μ - λ);
       //Probabilidad de N clientes en el sistema
       const pn = p0 * Math.pow(rho, N);
-      // Probabilidad de al menos N clientes en el sistema: sum_{n=N}^{∞} Pn - Cálculo de los primeros tres valores de la sumatoria
+      // Probabilidad de al menos N clientes en el sistema - Cálculo de los primeros tres valores de la sumatoria
       const pN = p0 * Math.pow(rho, N);
       const pN1 = p0 * Math.pow(rho, N + 1);
       const pN2 = p0 * Math.pow(rho, N + 2);
-      // Probabilidad de como máximo N clientes en el sistema: sum_{n=0}^{N} Pn
+      // Probabilidad de como máximo N clientes en el sistema
       let sumAtMostN = 0;
       for (let n = 0; n <= N; n++) {
         sumAtMostN += p0 * Math.pow(rho, n);
       }
       const pAtMostN = sumAtMostN;
 
-      return { rho, p0, lq, l, wq, w, pn, pAtMostN, pN, pN1, pN2 };
+      return { rho, tllegada, ts, p0, lq, l, wq, w, pn, pAtMostN, pN, pN1, pN2 };
     } catch (error) {
       throw new Error(`Error en el cálculo: ${error.message}`);
     }
@@ -169,6 +177,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearResults() {
     const resultElements = [
       "result-rho",
+      "result-tllegada",
+      "result-ts",
       "result-p0",
       "result-lq",
       "result-l",
@@ -188,10 +198,21 @@ document.addEventListener("DOMContentLoaded", () => {
   //Mostrar resultados con manejo de errores
   function displayResults(results, N) {
     try {
+      //Limpiar resultados anteriores
       clearResults();
+      //Validar si el sistema es inestable
       const isInfinity = results.rho === 1;
+      //Mostrar resultados
       document.getElementById("result-rho").textContent = formatNumber(
         results.rho,
+        false,
+      );
+      document.getElementById("result-tllegada").textContent = formatNumber(
+        results.tllegada,
+        false,
+      );
+      document.getElementById("result-ts").textContent = formatNumber(
+        results.ts,
         false,
       );
       document.getElementById("result-p0").textContent =
@@ -260,11 +281,14 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       if (isValid) {
         setLoading(true);
+        //Obtener los valores de las entradas
         const λ = parseFloat(elements.inputs.arribo.value);
         const μ = parseFloat(elements.inputs.servicio.value);
         const N_raw = elements.inputs.poblacion.value;
         const N = N_raw.trim() === "" ? undefined : parseFloat(N_raw);
+        //Calcular los resultados
         const results = calculateMM1(λ, μ, N);
+        //Mostrar los resultados
         displayResults(results, N);
       }
     } catch (error) {

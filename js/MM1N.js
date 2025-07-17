@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Validación de entradas
   function validateInput(value, inputId, N) {
+    //Primero preparamos el valor de la entrada
     const sanitizedValue = sanitizeInput(value);
     if (sanitizedValue !== value) {
       document.getElementById(inputId).value = sanitizedValue;
@@ -148,20 +149,18 @@ document.addEventListener("DOMContentLoaded", () => {
       LQ = (N * (N - 1)) / (2 * (N + 1));
     } else {
       //Número promedio de clientes en el sistema
-      Ls =
-        rho / (1 - rho) -
-        ((N + 1) * Math.pow(rho, N + 1)) / (1 - Math.pow(rho, N + 1));
+      Ls = (rho / (1 - rho)) - (((N + 1) * Math.pow(rho, N + 1)) / (1 - Math.pow(rho, N + 1)));
       //Número promedio de clientes en la cola
-      LQ = Ls - ((1 - Math.pow(rho, N)) * rho) / (1 - Math.pow(rho, N + 1));
+      LQ = Ls - (((1 - Math.pow(rho, N)) * rho) / (1 - Math.pow(rho, N + 1)));
     }
     //Tasa de rechazos
     tau = λ * PB;
     //Tasa de llegada efectiva
     lambdaE = λ * (1 - PB);
     //Tiempo promedio en el sistema
-    Ws = Ls / lambdaE;
+    Ws = Ls / λ;
     //Tiempo promedio en la cola
-    WQ = LQ / lambdaE;
+    WQ = LQ / λ;
     //Probabilidad de N clientes en el sistema
     pn = (Math.pow(rho, n) * (1 - rho)) / (1 - Math.pow(rho, N + 1));
     //Utilización efectiva del sistema
@@ -221,7 +220,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Mostrar resultados
   function displayResults(results, n, nInput, N) {
+    //Validar si el sistema es inestable
     const isInfinity = results.rho === 1;
+    //Mostrar resultados
     document.getElementById("result-rhoN").textContent = formatNumber(
       results.rho,
       false,
@@ -297,6 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  //Botón de calcular
   elements.submitButton.addEventListener("click", async () => {
     try {
       clearResults();
@@ -305,9 +307,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const isValid = Object.entries(elements.inputs).every(([key, input]) =>
         validateInput(input.value, input.id, N),
       );
+      //Si todas las entradas son válidas, calcular los resultados
       if (isValid) {
         setLoading(true);
+        //Calcular los resultados
         const results = calculateMM1N(λ, μ, N, n);
+        //Mostrar los resultados
         displayResults(results, n, nInput, N);
       }
     } catch (error) {

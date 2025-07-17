@@ -201,22 +201,25 @@
                             </div>
                             <div class="formula-section">
                                 <ul>
-                                    <li>\[ \rho_c = 1 - \left(\frac{r*(1+r)}{(1+r^2)}\right)^2, \text{ donde } r = \frac{\mu_2}{\mu_1} \]</li>
-                                    <li>\[ \pi_0 = \frac{(1-\rho)}{(1-\rho+\frac{1}{a})}, \text{ donde } a = \frac{(2\mu_1*\mu_2)}{(\mu_1+\mu_2)} \]</li>
+                                    <li>\[ \rho_c = 1 - \left(\frac{r*(1+r)}{(1+r^2)}\right)^{1/2}, \text{ donde } r = \frac{\mu_2}{\mu_1} \]</li>
+                                    <li>\[ P_0 = \frac{(1-\rho)}{(1-\rho+\frac{1}{a})}, \text{ donde } a = \frac{(2\mu_1*\mu_2)}{(\mu_1+\mu_2)} \]</li>
                                     <li>\[ N = \frac{\lambda}{[(1-\rho)*(\lambda+(1-\rho)*a)]} \]</li>
+                                    <li>\[ W_s = \frac{N}{\lambda} \]</li>
                                 </ul>
                                 <br>
                                 <p class="description-theory">Donde:
                                     <br>
-                                    • \(\rho_c\) es el umbral crítico de utilización
+                                    • \(\rho_c\) es el umbral crítico de utilización.
                                     <br>
-                                    • \(r\) es la relación entre las tasas de servicio (\(\mu_2/\mu_1\))
+                                    • \(r\) es la relación entre las tasas de servicio (\(\mu_2/\mu_1\)).
                                     <br>
-                                    • \(\pi_0\) es la probabilidad de que el sistema esté vacío
+                                    • \(P_0\) es la probabilidad de que el sistema esté vacío.
                                     <br>
-                                    • \(a\) es un factor que relaciona las tasas de servicio
+                                    • \(a\) es un factor que relaciona las tasas de servicio.
                                     <br>
-                                    • \(N\) es el número medio de clientes en el sistema
+                                    • \(N\) es el número medio de clientes en el sistema.
+                                    <br>
+                                    • \(W_s\) es el tiempo promedio en el sistema.
                                 </p>
                             </div>
                         </div>
@@ -241,22 +244,24 @@
                                     \[ \rho_c^2 * (1 + r^2) - \rho_c(2 + r^2) - (2r - 1) * (11 + r) = 0 \]
                                     <p class="description-theory" style="margin-left: 2rem;">Se obtiene \(\rho_c\) si se resuelve la cuadrática.</p>
                                 </li>
-                                <li>\[ \pi_0 = \frac{(1-\rho)}{(1-\rho+\frac{\lambda}{a'})}, \text{ donde } a' = \frac{(2\lambda+\mu)*(\mu_1*\mu_2)}{\mu*(\lambda+\mu_2)} \]
-                                </li>
+                                <li>\[ P_0 = \frac{(1-\rho)}{(1-\rho+\frac{\lambda}{a'})}, \text{ donde } a' = \frac{(2\lambda+\mu)*(\mu_1*\mu_2)}{\mu*(\lambda+\mu_2)} \]</li>
                                 <li>\[ N = \frac{\lambda}{[(1-\rho)*(\lambda+(1-\rho)*a')]} \]</li>
+                                <li>\[ W_s = \frac{N}{\lambda} \]</li>
                             </ul>
                             <br>
                             <p class="description-theory">Donde:
                                 <br>
-                                • \(\rho_c\) es el umbral crítico de utilización
+                                • \(\rho_c\) es el umbral crítico de utilización.
                                 <br>
-                                • \(r\) es la relación entre las tasas de servicio (\(\mu_2/\mu_1\))
+                                • \(r\) es la relación entre las tasas de servicio (\(\mu_2/\mu_1\)).
                                 <br>
-                                • \(\pi_0\) es la probabilidad de que el sistema esté vacío
+                                • \(P_0\) es la probabilidad de que el sistema esté vacío.
                                 <br>
-                                • \(a'\) es un factor que relaciona las tasas de servicio y llegada
+                                • \(a'\) es un factor que relaciona las tasas de servicio y llegada.
                                 <br>
-                                • \(N\) es el número medio de clientes en el sistema
+                                • \(N\) es el número medio de clientes en el sistema.
+                                <br>
+                                • \(W_s\) es el tiempo promedio en el sistema.
                             </p>
                         </div>
                     </div>
@@ -342,8 +347,8 @@
                         <h4>Servidores a la Misma Velocidad</h4>
                         <div class="results-grid" id="equal-servers-results">
                             <div class="result-item">
-                                <h4>Probabilidad de sistema vacío (\( \pi_0 \)):</h4>
-                                <p id="result-pi0-equal"></p>
+                                <h4>Probabilidad de sistema vacío (\( P_0 \)):</h4>
+                                <p id="result-P0-equal"></p>
                             </div>
                             <div class="result-item">
                                 <h4>Número medio de clientes (\( N \)):</h4>
@@ -361,7 +366,7 @@
                                     <p id="result-rho-c-no-selection"></p>
                                 </div>
                                 <div class="result-item">
-                                    <h4>Probabilidad de sistema vacío (\( \pi_0 \)):</h4>
+                                    <h4>Probabilidad de sistema vacío (\( P_0 \)):</h4>
                                     <p id="result-pi0-no-selection"></p>
                                 </div>
                                 <div class="result-item">
@@ -383,7 +388,7 @@
                                     <p id="result-rho-c-selection"></p>
                                 </div>
                                 <div class="result-item">
-                                    <h4>Probabilidad de sistema vacío (\( \pi_0 \)):</h4>
+                                    <h4>Probabilidad de sistema vacío (\( P_0 \)):</h4>
                                     <p id="result-pi0-selection"></p>
                                 </div>
                                 <div class="result-item">

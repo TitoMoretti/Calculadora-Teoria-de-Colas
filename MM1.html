@@ -81,6 +81,8 @@
           <div class="formula-section">
             <ul>
               <li>\( \rho = \frac{\lambda}{\mu} \)</li>
+              <li>\( T_{llegada} = \frac{1}{\lambda} \)</li>
+              <li>\( T_s = \frac{1}{\mu} \)</li>
               <li>\( P_0 = 1 - \rho \)</li>
               <li>\( P_n = (1-\rho) \cdot \rho^n \)</li>
               <li>\( L_q = \frac{\lambda^2}{\mu(\mu - \lambda)} \)</li>
@@ -96,6 +98,10 @@
               <br />
               • \( \rho \) es la intensidad de tráfico (utilización del
               sistema).
+              <br />
+              • \( T_{llegada} \) es el tiempo promedio entre llegadas de clientes.
+              <br />
+              • \( T_s \) es el tiempo medio de servicio para cada cliente.
               <br />
               • \( P_0 \) es la probabilidad de que no haya clientes en el
               sistema.
@@ -158,6 +164,14 @@
               <div class="result-item">
                 <h4>Intensidad de tráfico (\( \rho \)):</h4>
                 <p id="result-rho"></p>
+              </div>
+              <div class="result-item">
+                <h4>Tiempo entre llegadas (\( T_{llegada} \)):</h4>
+                <p id="result-tllegada"></p>
+              </div>
+              <div class="result-item">
+                <h4>Tiempo de servicio (\( T_s \)):</h4>
+                <p id="result-ts"></p>
               </div>
               <div class="result-item">
                 <h4>Probabilidad de 0 clientes en el sistema (\( P_0 \)):</h4>

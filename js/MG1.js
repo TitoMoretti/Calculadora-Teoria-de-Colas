@@ -87,13 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //Utilización del sistema
     const rho = lambda / mu;
     //Esperanza matemática del número de clientes en el sistema
-    const en =
-      (rho / (1 - rho)) *
-      (1 - (rho / 2) * (1 - Math.pow(mu, 2) * Math.pow(sigma, 2)));
+    const en = (rho / (1 - rho)) * (1 - (rho / 2) * (1 - Math.pow(mu, 2) * Math.pow(sigma, 2)));
     //Esperanza matemática del tiempo de permanencia en el sistema
-    const et =
-      (1 / (mu * (1 - rho))) *
-      (1 - (rho / 2) * (1 - Math.pow(mu, 2) * Math.pow(sigma, 2)));
+    const et = (1 / (mu * (1 - rho))) * (1 - (rho / 2) * (1 - Math.pow(mu, 2) * Math.pow(sigma, 2)));
     //Varianza del tiempo de servicio
     const varianza = Math.pow(sigma, 2);
 
@@ -117,12 +113,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Mostrar resultados
   function displayResults(results) {
+    //Formato de números (redondeo a 4 decimales)
     const formatNumber = (num, isInfinity) => {
       if (isInfinity) return "∞";
       if (isNaN(num) || !isFinite(num)) return "Error";
       return num.toFixed(4);
     };
+    //Validar si el sistema es inestable
     const isInfinity = results.rho === 1;
+    //Mostrar resultados
     document.getElementById("result-muN").textContent = formatNumber(
       results.mu,
       false,
@@ -162,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //Deshabilitar el otro campo cuando uno se edita, y mostrar mensaje de ayuda
   const muOriginalPlaceholder = elements.inputs.mu.placeholder;
   const esOriginalPlaceholder = elements.inputs.es.placeholder;
-
   elements.inputs.mu.addEventListener("input", () => {
     if (elements.inputs.mu.value.trim() !== "") {
       elements.inputs.es.value = "";
@@ -189,18 +187,23 @@ document.addEventListener("DOMContentLoaded", () => {
   //Botón de cálculo
   elements.submitButton.addEventListener("click", () => {
     try {
+      //Limpiar resultados anteriores
       clearResults();
+      //Validar si todas las entradas son válidas
       const isValid = Object.entries(elements.inputs).every(([key, input]) =>
         validateInput(input.value, input.id),
       );
       if (!isValid) return;
+      //Obtener los valores de las entradas
       const lambda = parseFloat(elements.inputs.lambda.value);
       let mu = parseFloat(elements.inputs.mu.value);
       let es = parseFloat(elements.inputs.es.value);
       const sigma = parseFloat(elements.inputs.sigma.value);
       if (isNaN(mu)) mu = undefined;
       if (isNaN(es)) es = undefined;
+      //Calcular los resultados
       const results = calculateMG1(lambda, mu, es, sigma);
+      //Mostrar los resultados
       displayResults(results);
     } catch (error) {
       showError("submitIdN", error.message);
