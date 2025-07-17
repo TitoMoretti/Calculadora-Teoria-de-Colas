@@ -119,7 +119,7 @@
               <li>
                 \( \gamma_o = \mu - \mu \cdot P_0 = \mu \cdot (1 - P_0) \)
               </li>
-              <li>\( \gamma_i = \gamma_o\)</li>
+              <li>\( \gamma = \gamma_i = \gamma_o\)</li>
             </ul>
             <br />
             <p class="description-theory">
@@ -131,9 +131,9 @@
               <br />
               • \(P_n\) es la probabilidad de que haya n clientes en el sistema.
               <br />
-              • \(P_B\) es la probabilidad de que haya N clientes en el sistema.
+              • \(P_B\) es la probabilidad de bloqueo (un cliente que llega sea rechazado).
               <br />
-              • \( \tau \) es la tasa de rechazos.
+              • \( \tau \) es la tasa de rechazos (tasa de arribos de clientes rechazados).
               <br />
               • \( \bar{\lambda} \) es la tasa de llegada efectiva.
               <br />
@@ -153,9 +153,11 @@
               • \(W_b\) es el tiempo promedio de clientes en cola para un
               sistema ocupado.
               <br />
-              • \( \gamma_i \) es el rendimiento a la entrada.
+              • \( \gamma \) es el rendimiento (verdadero aprovechamiento del sistema).
               <br />
-              • \( \gamma_o \) es el rendimiento a la salida.
+              • \( \gamma_i \) es el rendimiento a la entrada (tasa de arribos de clientes que logran entran al sistema).
+              <br />
+              • \( \gamma_o \) es el rendimiento a la salida (restante de la tasa de servicio al quitar los tiempos ociosos del servidor).
             </p>
           </div>
         </div>

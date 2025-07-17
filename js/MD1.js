@@ -105,12 +105,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   //Mostrar resultados
   function displayResults(results) {
+    //Formato de números (redondeo a 4 decimales)
     const formatNumber = (num, isInfinity) => {
       if (isInfinity) return "∞";
       if (isNaN(num) || !isFinite(num)) return "Error";
       return num.toFixed(4);
     };
+    //Validar si el sistema es inestable
     const isInfinity = results.rho === 1;
+    //Mostrar resultados
     document.getElementById("result-muN").textContent = formatNumber(
       results.mu,
       false,
@@ -172,17 +175,22 @@ document.addEventListener("DOMContentLoaded", () => {
   //Botón de cálculo
   elements.submitButton.addEventListener("click", () => {
     try {
+      //Limpiar resultados anteriores
       clearResults();
+      //Validar si todas las entradas son válidas
       const isValid = Object.entries(elements.inputs).every(([key, input]) =>
         validateInput(input.value, input.id),
       );
       if (!isValid) return;
+      //Obtener los valores de las entradas
       const lambda = parseFloat(elements.inputs.lambda.value);
       let mu = parseFloat(elements.inputs.mu.value);
       let es = parseFloat(elements.inputs.es.value);
       if (isNaN(mu)) mu = undefined;
       if (isNaN(es)) es = undefined;
+      //Calcular los resultados
       const results = calculateMD1(lambda, mu, es);
+      //Mostrar los resultados
       displayResults(results);
     } catch (error) {
       showError("submitIdN", error.message);

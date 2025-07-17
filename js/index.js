@@ -25,35 +25,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  //Redirigir a la página de MM1 al hacer clic en el modelo
+  //MM1
   if (modelMM1) {
     modelMM1.addEventListener("click", () => {
       window.location.href = "MM1.html";
     });
   }
 
-  //Redirigir a la página de MM1N al hacer clic en el modelo
+  //MM1N
   if (modelMM1N) {
     modelMM1N.addEventListener("click", () => {
       window.location.href = "MM1N.html";
     });
   }
 
-  //Redirigir a la página de MM2 al hacer clic en el modelo
+  //MM2
   if (modelMM2) {
     modelMM2.addEventListener("click", () => {
       window.location.href = "MM2.html";
     });
   }
 
-  //Redirigir a la página de MG1 al hacer clic en el modelo
+  //MG1
   if (modelMG1) {
     modelMG1.addEventListener("click", () => {
       window.location.href = "MG1.html";
     });
   }
 
-  //Redirigir a la página de MD1 al hacer clic en el modelo
+  //MD1
   if (modelMD1) {
     modelMD1.addEventListener("click", () => {
       window.location.href = "MD1.html";

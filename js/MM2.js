@@ -112,13 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return showError(inputId, "Máximo 4 decimales permitidos");
     }
 
-    if (inputId === "arriboId") {
+    /*if (inputId === "arriboId") {
       const service1Rate = parseFloat(elements.inputs.servicio1.value);
       const service2Rate = parseFloat(elements.inputs.servicio2.value);
-      /*if (service1Rate && service2Rate && numValue >= (service1Rate + service2Rate)) {
+      if (service1Rate && service2Rate && numValue >= (service1Rate + service2Rate)) {
                 return showError(inputId, 'La tasa de arribo debe ser menor que la suma de las tasas de servicio');
-            }*/
-    }
+            }
+    }*/
 
     return clearError(inputId);
   }
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Longitud promedio del sistema
     const Ls = ρ / (1 - ρ);
     //Longitud promedio de la cola
-    const LQ = Math.pow(ρ, 2) / (1 - ρ);
+    const LQ = (Math.pow(ρ, 2)) / (1 - ρ);
     //Tiempo promedio en el sistema
     const Ws = Ls / λ;
     //Tiempo promedio en la cola
@@ -156,11 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
     //Relación entre las tasas de servicio
     const r = μ2 / μ1;
     //Umbral crítico de utilización
-    const ρc = 1 - Math.pow((r * (1 + r)) / (1 + Math.pow(r, 2)), 0.5);
+    const ρc = 1 - (Math.pow((r * (1 + r)) / (1 + Math.pow(r, 2)), 0.5));
     //Factor de utilización
     const a = (2 * μ1 * μ2) / (μ1 + μ2);
     //Probabilidad del sistema vacío
-    const π0 = (1 - ρ) / (1 - ρ + λ / a);
+    const π0 = (1 - ρ) / (1 - ρ + (λ / a));
     //Número promedio de clientes en el sistema
     const N = λ / ((1 - ρ) * (λ + (1 - ρ) * a));
     //Tiempo promedio en el sistema
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Factor de utilización
     const aPrime = ((2 * λ + μ) * (μ1 * μ2)) / (μ * (λ + μ2));
     //Probabilidad del sistema vacío
-    const π0 = (1 - ρ) / (1 - ρ + λ / aPrime);
+    const π0 = (1 - ρ) / (1 - ρ + (λ / aPrime));
     //Número promedio de clientes en el sistema
     const N = λ / ((1 - ρ) * (λ + (1 - ρ) * aPrime));
     //Tiempo promedio en el sistema
@@ -205,7 +205,9 @@ document.addEventListener("DOMContentLoaded", () => {
     withSelectionResults,
     isEqualServers,
   ) {
+    //Validar si el sistema es inestable
     const isInfinity = generalResults.ρ === 1;
+    //Mostrar resultados
     document.getElementById("general-results").style.display = "block";
     document.getElementById("result-mu-s-general").textContent = formatNumber(
       generalResults.μs,
@@ -239,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (typeof generalResults.pn === "number" && !isNaN(generalResults.pn) && elements.inputs.clientes.value)
         ? elements.inputs.clientes.value
         : "";
+    //Mostrar resultados para servidores a la misma velocidad
     if (isEqualServers) {
       document.getElementById("equal-servers-results").style.display = "block";
       document.getElementById("different-servers-results").style.display =
@@ -249,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
         equalResults.N,
         isInfinity,
       );
+    //Mostrar resultados para servidores a diferentes velocidades
     } else {
       document.getElementById("equal-servers-results").style.display = "none";
       document.getElementById("different-servers-results").style.display =
@@ -302,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isValid) {
           throw new Error("Por favor, corrija los errores antes de calcular");
         }
-
+        //Obtener los valores de las entradas
         const λ = parseFloat(elements.inputs.arribo.value);
         const μ1 = parseFloat(elements.inputs.servicio1.value);
         const μ2 = parseFloat(elements.inputs.servicio2.value);
@@ -321,17 +325,20 @@ document.addEventListener("DOMContentLoaded", () => {
         let withSelectionResults = null;
 
         if (isEqualServers) {
+          //Resultados para servidores a la misma velocidad
           equalResults = calculateMM2EqualServers(
             generalResults.ρ,
             generalResults.Ls,
           );
         } else {
+          //Resultados para servidores a diferentes velocidades sin selección
           noSelectionResults = calculateMM2NoSelection(
             λ,
             μ1,
             μ2,
             generalResults.ρ,
           );
+          //Resultados para servidores a diferentes velocidades con selección
           withSelectionResults = calculateMM2WithSelection(
             λ,
             μ1,
